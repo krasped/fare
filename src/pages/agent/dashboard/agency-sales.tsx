@@ -1,7 +1,7 @@
-import {AgencySalesPageView} from "@/page-sections/agent/dashboard/page-view";
+// import {AgencySalesPageView} from "@/page-sections/agent/dashboard/page-view";
 
-const AgencySalesPage = () => {
-  return <AgencySalesPageView />;
-};
+// const AgencySalesPage = () => {
+//   return <AgencySalesPageView />;
+// };
 
-export default AgencySalesPage;
+// export default AgencySalesPage;

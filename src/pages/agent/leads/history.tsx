@@ -1,7 +1,7 @@
-import {OrderHistoryPageView} from "@/page-sections/agent/leads/page-view";
+// import {OrderHistoryPageView} from "@/page-sections/agent/leads/page-view";
 
-const OrderHistoryPage = () => {
-  return <OrderHistoryPageView />;
-};
+// const OrderHistoryPage = () => {
+//   return <OrderHistoryPageView />;
+// };
 
-export default OrderHistoryPage;
+// export default OrderHistoryPage;

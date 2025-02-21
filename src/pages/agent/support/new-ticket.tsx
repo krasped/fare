@@ -1,7 +1,7 @@
-import {NewTicketPageView} from "@/page-sections/agent/support/page-view";
+// import {NewTicketPageView} from "@/page-sections/agent/support/page-view";
 
-const NewTicketPage = () => {
-  return <NewTicketPageView />;
-};
+// const NewTicketPage = () => {
+//   return <NewTicketPageView />;
+// };
 
-export default NewTicketPage;
+// export default NewTicketPage;

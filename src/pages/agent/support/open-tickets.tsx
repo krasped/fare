@@ -1,7 +1,7 @@
-import {OpenTicketsPageView} from "@/page-sections/agent/support/page-view";
+// import {OpenTicketsPageView} from "@/page-sections/agent/support/page-view";
 
-const OpenTicketsPage = () => {
-  return <OpenTicketsPageView />;
-};
+// const OpenTicketsPage = () => {
+//   return <OpenTicketsPageView />;
+// };
 
-export default OpenTicketsPage;
+// export default OpenTicketsPage;

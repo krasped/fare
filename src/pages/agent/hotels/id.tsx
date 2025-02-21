@@ -1,7 +1,7 @@
-import {HotelDetailsPageView} from "@/page-sections/agent/hotels/page-view";
+// import {HotelDetailsPageView} from "@/page-sections/agent/hotels/page-view";
 
-const HotelDetailsPage = () => {
-  return <HotelDetailsPageView />;
-};
+// const HotelDetailsPage = () => {
+//   return <HotelDetailsPageView />;
+// };
 
-export default HotelDetailsPage;
+// export default HotelDetailsPage;

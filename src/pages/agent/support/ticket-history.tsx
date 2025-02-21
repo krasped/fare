@@ -1,7 +1,7 @@
-import {TicketHistoryPageView} from "@/page-sections/agent/support/page-view";
+// import {TicketHistoryPageView} from "@/page-sections/agent/support/page-view";
 
-const TicketHistoryPage = () => {
-  return <TicketHistoryPageView />;
-};
+// const TicketHistoryPage = () => {
+//   return <TicketHistoryPageView />;
+// };
 
-export default TicketHistoryPage;
+// export default TicketHistoryPage;

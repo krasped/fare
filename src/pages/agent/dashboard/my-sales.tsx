@@ -1,7 +1,7 @@
-import {MySalesPageView} from "@/page-sections/agent/dashboard/page-view";
+// import {MySalesPageView} from "@/page-sections/agent/dashboard/page-view";
 
-const MySalesPage = () => {
-  return <MySalesPageView />;
-};
+// const MySalesPage = () => {
+//   return <MySalesPageView />;
+// };
 
-export default MySalesPage;
+// export default MySalesPage;

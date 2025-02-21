@@ -1,7 +1,7 @@
-import {OrdersPageView} from "@/page-sections/agent/orders/page-view";
+// import {OrdersPageView} from "@/page-sections/agent/orders/page-view";
 
-const OrdersPage = () => {
-  return <OrdersPageView />;
-};
+// const OrdersPage = () => {
+//   return <OrdersPageView />;
+// };
 
-export default OrdersPage;
+// export default OrdersPage;

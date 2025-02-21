@@ -1,7 +1,7 @@
-import {FAQPageView} from "@/page-sections/agent/support/page-view";
+// import {FAQPageView} from "@/page-sections/agent/support/page-view";
 
-const FAQPage = () => {
-  return <FAQPageView />;
-};
+// const FAQPage = () => {
+//   return <FAQPageView />;
+// };
 
-export default FAQPage;
+// export default FAQPage;

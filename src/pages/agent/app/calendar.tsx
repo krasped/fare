@@ -1,7 +1,7 @@
-import {CalendarPageView} from "@/page-sections/agent/app/page-view";
+// import {CalendarPageView} from "@/page-sections/agent/app/page-view";
 
-const CalendarPage = () => {
-  return <CalendarPageView />;
-};
+// const CalendarPage = () => {
+//   return <CalendarPageView />;
+// };
 
-export default CalendarPage;
+// export default CalendarPage;

@@ -1,7 +1,7 @@
-import {ChatsPageView} from "@/page-sections/agent/app/page-view";
+// import {ChatsPageView} from "@/page-sections/agent/app/page-view";
 
-const ChatsPage = () => {
-  return <ChatsPageView />;
-};
+// const ChatsPage = () => {
+//   return <ChatsPageView />;
+// };
 
-export default ChatsPage;
+// export default ChatsPage;

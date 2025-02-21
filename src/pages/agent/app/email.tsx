@@ -1,7 +1,7 @@
-import {EmailPageView} from "@/page-sections/agent/app/page-view";
+// import {EmailPageView} from "@/page-sections/agent/app/page-view";
 
-const EmailPage = () => {
-  return <EmailPageView />;
-};
+// const EmailPage = () => {
+//   return <EmailPageView />;
+// };
 
-export default EmailPage;
+// export default EmailPage;

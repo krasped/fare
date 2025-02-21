@@ -1,7 +1,7 @@
-import {ManageAgentsPageView} from "@/page-sections/agent/account/page-view";
+// import {ManageAgentsPageView} from "@/page-sections/agent/account/page-view";
 
-const ManageAgentsPage = () => {
-  return <ManageAgentsPageView />;
-};
+// const ManageAgentsPage = () => {
+//   return <ManageAgentsPageView />;
+// };
 
-export default ManageAgentsPage;
+// export default ManageAgentsPage;

@@ -1,7 +1,7 @@
-import BestPriceFlightsPageView from "@/page-sections/agent/flights/page-view";
+// import BestPriceFlightsPageView from "@/page-sections/agent/flights/page-view";
 
-const BestPriceFlightsPage = () => {
-  return <BestPriceFlightsPageView />;
-};
+// const BestPriceFlightsPage = () => {
+//   return <BestPriceFlightsPageView />;
+// };
 
-export default BestPriceFlightsPage;
+// export default BestPriceFlightsPage;

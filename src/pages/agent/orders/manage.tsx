@@ -1,7 +1,7 @@
-import {ManageOrdersPageView} from "@/page-sections/agent/orders/page-view";
+// import {ManageOrdersPageView} from "@/page-sections/agent/orders/page-view";
 
-const ManageOrdersPage = () => {
-  return <ManageOrdersPageView />;
-};
+// const ManageOrdersPage = () => {
+//   return <ManageOrdersPageView />;
+// };
 
-export default ManageOrdersPage;
+// export default ManageOrdersPage;

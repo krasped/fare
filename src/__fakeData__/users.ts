@@ -1,6 +1,6 @@
 import { User } from "@/page-sections/admin/users/page-view";
 
-export const USER_LIST: User[]  = [
+export const USER_LIST: any[]  = [
   {
     id: "fkki_JgjwEOMmyizDsy6J",
     role: "Editor",

@@ -177,7 +177,7 @@ const UserListPageView = () => {
             handleChangeFilter={handleChangeFilter}
           />
           <BigModal open={openViewUser} handleClose={() => setOpenViewUser(false)}>
-            <ViewUser setOpenModal={setOpenViewUser} data={data}/>
+            {/* <ViewUser setOpenModal={setOpenViewUser} data={data}/> */}
           </BigModal>
         </Box>
 

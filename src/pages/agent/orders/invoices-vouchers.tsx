@@ -1,7 +1,7 @@
-import {InvoicesVouchersPageView} from "@/page-sections/agent/orders/page-view";
+// import {InvoicesVouchersPageView} from "@/page-sections/agent/orders/page-view";
 
-const InvoicesVouchersPage = () => {
-  return <InvoicesVouchersPageView />;
-};
+// const InvoicesVouchersPage = () => {
+//   return <InvoicesVouchersPageView />;
+// };
 
-export default InvoicesVouchersPage;
+// export default InvoicesVouchersPage;

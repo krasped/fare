@@ -1,7 +1,7 @@
-import CoursesPageView from "@/page-sections/agent/tools/page-view";
+// import CoursesPageView from "@/page-sections/agent/tools/page-view";
 
-const CoursesPage = () => {
-  return <CoursesPageView />;
-};
+// const CoursesPage = () => {
+//   return <CoursesPageView />;
+// };
 
-export default CoursesPage;
+// export default CoursesPage;

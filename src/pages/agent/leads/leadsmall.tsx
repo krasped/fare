@@ -1,7 +1,7 @@
-import {LeadsMarketplacePageView} from "@/page-sections/agent/leads/page-view";
+// import {LeadsMarketplacePageView} from "@/page-sections/agent/leads/page-view";
 
-const LeadsMarketplacePage = () => {
-  return <LeadsMarketplacePageView />;
-};
+// const LeadsMarketplacePage = () => {
+//   return <LeadsMarketplacePageView />;
+// };
 
-export default LeadsMarketplacePage;
+// export default LeadsMarketplacePage;

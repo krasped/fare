@@ -1,7 +1,7 @@
-import ConnectionNetworkPageView from "@/page-sections/agent/network/page-view";
+// import ConnectionNetworkPageView from "@/page-sections/agent/network/page-view";
 
-const ConnectionNetworkPage = () => {
-  return <ConnectionNetworkPageView />;
-};
+// const ConnectionNetworkPage = () => {
+//   return <ConnectionNetworkPageView />;
+// };
 
-export default ConnectionNetworkPage;
+// export default ConnectionNetworkPage;

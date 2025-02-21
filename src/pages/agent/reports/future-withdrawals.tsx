@@ -1,7 +1,7 @@
-import {FutureWithdrawalsPageView} from "@/page-sections/agent/reports/page-view";
+// import {FutureWithdrawalsPageView} from "@/page-sections/agent/reports/page-view";
 
-const FutureWithdrawalsPage = () => {
-  return <FutureWithdrawalsPageView />;
-};
+// const FutureWithdrawalsPage = () => {
+//   return <FutureWithdrawalsPageView />;
+// };
 
-export default FutureWithdrawalsPage;
+// export default FutureWithdrawalsPage;

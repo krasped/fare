@@ -1,7 +1,7 @@
-import {MyLeadsPageView} from "@/page-sections/agent/leads/page-view";
+// import {MyLeadsPageView} from "@/page-sections/agent/leads/page-view";
 
-const MyLeadsPage = () => {
-  return <MyLeadsPageView />;
-};
+// const MyLeadsPage = () => {
+//   return <MyLeadsPageView />;
+// };
 
-export default MyLeadsPage;
+// export default MyLeadsPage;

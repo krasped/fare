@@ -1,7 +1,7 @@
-import AnalyticsPageView from "@/page-sections/admin/analytics/page-view";
+// import AnalyticsPageView from "@/page-sections/admin/analytics/page-view";
 
-const AnalyticsPage = () => {
-  return <AnalyticsPageView />;
-};
+// const AnalyticsPage = () => {
+//   return <AnalyticsPageView />;
+// };
 
-export default AnalyticsPage;
+// export default AnalyticsPage;

@@ -1,7 +1,7 @@
-import {BookingConfirmationPageView} from "@/page-sections/agent/hotels/page-view";
+// import {BookingConfirmationPageView} from "@/page-sections/agent/hotels/page-view";
 
-const BookingConfirmationPage = () => {
-  return <BookingConfirmationPageView />;
-};
+// const BookingConfirmationPage = () => {
+//   return <BookingConfirmationPageView />;
+// };
 
-export default BookingConfirmationPage;
+// export default BookingConfirmationPage;

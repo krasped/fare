@@ -1,7 +1,7 @@
-import {ContactPageView} from "@/page-sections/agent/support/page-view";
+// import {ContactPageView} from "@/page-sections/agent/support/page-view";
 
-const ContactPage = () => {
-  return <ContactPageView />;
-};
+// const ContactPage = () => {
+//   return <ContactPageView />;
+// };
 
-export default ContactPage;
+// export default ContactPage;

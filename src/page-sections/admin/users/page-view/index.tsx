@@ -86,7 +86,6 @@ const mockUsers: User[] = [
 ]
 
 const UserListPageView = () => {
-  console.log(123)
   const [users, setUsers] = useState([...USER_LIST]);
   const [userFilter, setUserFilter] = useState({ subscriptionType: "", search: "", role: "", agency: "" });
   const [isEdit, setIsEdit] = useState(false);
@@ -172,8 +171,6 @@ const UserListPageView = () => {
 
           <SearchArea
             filter={userFilter}
-            gridRoute="/dashboard/user-grid"
-            listRoute="/dashboard/user-list"
             handleChangeFilter={handleChangeFilter}
           />
           <BigModal open={openViewUser} handleClose={() => setOpenViewUser(false)}>

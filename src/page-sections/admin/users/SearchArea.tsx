@@ -15,8 +15,6 @@ import { Roles } from "@/components/auth/RoleBasedGuard";
 type SearchAreaProps = {
   // value?: string;
   // onChange?: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-  gridRoute: string;
-  listRoute: string;
   handleChangeFilter: (key: string, value: string) => void;
   filter: { role: string; search: string; agency: string };
 };
@@ -34,7 +32,7 @@ const SearchArea = (props: SearchAreaProps) => {
     { id: 2, name: "Top Reality", value: "top reality" },
     { id: 3, name: "Best Homes", value: "best homes" },
   ];
-  const { gridRoute, listRoute, handleChangeFilter, filter } = props;
+  const { handleChangeFilter, filter } = props;
 
   const navigate = useNavigate();
   const { pathname } = useLocation();

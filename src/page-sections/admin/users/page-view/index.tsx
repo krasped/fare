@@ -27,6 +27,12 @@ import { ViewUser } from "../viewUser";
 
 export type SubscriptionType= "Basic" | "Professional" | "Enterprise"
 
+export enum Statuses {
+  pending = "Pending",
+  active = "Active",
+  inactive = "Inactive",
+}
+
 export interface User {
   id: string
   avatar?: string

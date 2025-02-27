@@ -18,6 +18,7 @@ import { createCustomTheme } from "@/theme";
 import useSettings from "@/hooks/useSettings";
 // I18N FILE
 import "./i18n";
+import { SnackbarProvider } from "./contexts/snackbarContext";
 
 const App = () => {
   const { settings } = useSettings();
@@ -31,8 +32,10 @@ const App = () => {
         <ThemeProvider theme={theme}>
           <AuthProvider>
             <RTL>
-              <CssBaseline />
-              <RouterProvider router={router} />
+              <SnackbarProvider>
+                <CssBaseline />
+                <RouterProvider router={router} />
+              </SnackbarProvider>
             </RTL>
           </AuthProvider>
         </ThemeProvider>

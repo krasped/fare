@@ -9,6 +9,7 @@ import { Paragraph } from "@/components/typography";
 import { TableMoreMenuItem, TableMoreMenu } from "@/components/table";
 import { Campaign, Statuses } from "./page-view";
 import { ConfirmationDialog } from "@/components/dialogs";
+import { StatusBadge } from "@/components/status-badge";
 
 // ==============================================================
 interface UserRowProps {
@@ -78,11 +79,9 @@ const UserTableRow = (props: UserRowProps) => {
       <TableCell padding="normal">{user.platform}</TableCell>
 
       <TableCell padding="normal">
-        <Chip
-          size="small"
-          label={user.status}
-          color={user.status === Statuses.active ? "success" : (user.status === Statuses.pending ? "warning" : "error")}
-        />
+        <StatusBadge type={user.status === Statuses.active ? "success" : (user.status === Statuses.pending ? "warning" : "error")}>
+          {user.status}
+        </StatusBadge>
       </TableCell>
 
       <TableCell padding="normal">{user.createdAt}</TableCell>

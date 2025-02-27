@@ -11,10 +11,10 @@ import { Roles } from "@/components/auth/RoleBasedGuard";
 const Dashboard = Loadable(lazy(() => import("@/pages/admin/dashboard")));
 const Users = Loadable(lazy(() => import("@/pages/admin/users")));
 const Leads = Loadable(lazy(() => import("@/pages/admin/leads")));
-// const Analytics = Loadable(lazy(() => import("@/pages/admin/analytics")));
+const Analytics = Loadable(lazy(() => import("@/pages/admin/analytics")));
 const Billing = Loadable(lazy(() => import("@/pages/admin/billing")));
 // const Settings = Loadable(lazy(() => import("@/pages/admin/settings")));
-// const Support = Loadable(lazy(() => import("@/pages/admin/support")));
+const Support = Loadable(lazy(() => import("@/pages/admin/support")));
 
 
 export const AdminRoutes = [
@@ -33,10 +33,10 @@ export const AdminRoutes = [
       { index: true, element: <Dashboard /> },
       { path: "users", element: <Users /> },
       { path: "leads", element: <Leads /> },
-      // { path: "analytics",element: <Analytics /> },
+      { path: "analytics",element: <Analytics /> },
       { path: "billing",element: <Billing /> },
       // { path: "settings",element: <Settings /> },
-      // { path: "support",element: <Support /> },
+      { path: "support",element: <Support /> },
     ],
   },
 ];

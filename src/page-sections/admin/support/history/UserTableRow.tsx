@@ -1,5 +1,5 @@
 import { MouseEvent, useState } from "react";
-import { Avatar, Checkbox, TableCell, TableRow } from "@mui/material";
+import { Avatar, Checkbox, Chip, TableCell, TableRow } from "@mui/material";
 import { DeleteOutline, PageviewOutlined, Edit } from "@mui/icons-material";
 // CUSTOM DEFINED HOOK
 import useNavigate from "@/hooks/useNavigate";
@@ -7,25 +7,28 @@ import useNavigate from "@/hooks/useNavigate";
 import { FlexBox } from "@/components/flexbox";
 import { Paragraph } from "@/components/typography";
 import { TableMoreMenuItem, TableMoreMenu } from "@/components/table";
-import { Statuses, User } from "./page-view";
+import { ConfirmationDialog } from "@/components/dialogs";
 import { StatusBadge } from "@/components/status-badge";
+import { Ticket } from ".";
+import { Statuses } from "../page-view";
 
 // ==============================================================
 interface UserRowProps {
   user: any;
   isSelected: boolean;
-  handleViewProfileDetailsUser: (user: User) => void;
-  handleEditUser: (user: User) => void;
+  handleViewProfileDetailsUser: (user: Ticket) => void;
+  // handleEditUser: (user: Campaign) => void;
   handleDeleteUser: (id: string) => void;
   handleSelectRow: (_: MouseEvent, name: string) => void;
 }
 // ==============================================================
 
 const UserTableRow = (props: UserRowProps) => {
-  const { user, isSelected, handleSelectRow, handleDeleteUser, handleEditUser, handleViewProfileDetailsUser } = props;
+  const { user, isSelected, handleSelectRow, handleDeleteUser, handleViewProfileDetailsUser } = props;
 
   const navigate = useNavigate();
   const [openMenuEl, setOpenMenuEl] = useState<null | HTMLElement>(null);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleOpenMenu = (event: MouseEvent<HTMLButtonElement>) => {
     setOpenMenuEl(event.currentTarget);
@@ -33,21 +36,39 @@ const UserTableRow = (props: UserRowProps) => {
 
   const handleCloseOpenMenu = () => setOpenMenuEl(null);
 
+
+  const handleConfirm = (isConfirm: boolean) =>{
+    setIsOpen(false)
+    if(isConfirm) handleDeleteUser(user.id);
+  }
+
   return (
     <TableRow hover>
-      <TableCell padding="checkbox">
+      {/* <TableCell padding="checkbox">
         <Checkbox
           size="small"
           color="primary"
           checked={isSelected}
           onClick={(event) => handleSelectRow(event, user.id)}
         />
-      </TableCell>
+      </TableCell> */}
 
       <TableCell padding="normal">
-        <FlexBox alignItems="center" gap={2}>
-          <Avatar src={user.avatar} alt={user.name} variant="rounded" />
+      <Paragraph
+              fontWeight={500}
+              color="text.primary"
+              sx={{
+                ":hover": { textDecoration: "underline", cursor: "pointer" },
+              }}
+            >
+              {user.id}
+        </Paragraph></TableCell>
 
+      {/* <TableCell padding="normal">{user.email}</TableCell> */}
+
+      <TableCell padding="normal">{user.category}</TableCell>
+
+      <TableCell padding="normal"> <FlexBox alignItems="center" gap={2}>
           <div>
             <Paragraph
               fontWeight={500}
@@ -56,27 +77,20 @@ const UserTableRow = (props: UserRowProps) => {
                 ":hover": { textDecoration: "underline", cursor: "pointer" },
               }}
             >
-              {user.name}
+              {user?.submittedBy?.name}
             </Paragraph>
 
-            <Paragraph fontSize={13}>#{user.id.substring(0, 11)}</Paragraph>
+            <Paragraph fontSize={13}>{user?.submittedBy?.email}</Paragraph>
           </div>
-        </FlexBox>
-      </TableCell>
+        </FlexBox></TableCell>
 
-      <TableCell padding="normal">{user.email}</TableCell>
+      <TableCell padding="normal">{user.resolvedBy}</TableCell>
 
-      <TableCell padding="normal">{user.role}</TableCell>
+      <TableCell padding="normal">{user.createdAt}</TableCell>
 
-      <TableCell padding="normal">{user.agency}</TableCell>
+      <TableCell padding="normal">{user.closedAt}</TableCell>
 
-      <TableCell padding="normal">{user.subscriptionType}</TableCell>
-
-      <TableCell padding="normal">
-        <StatusBadge type={user.status === Statuses.active ? "success" : (user.status === Statuses.pending ? "warning" : "error")}>
-          {user.status}
-        </StatusBadge>
-      </TableCell>
+      <TableCell padding="normal">{user.resolutionStatus}</TableCell>
 
       <TableCell padding="normal">
         <TableMoreMenu
@@ -92,24 +106,30 @@ const UserTableRow = (props: UserRowProps) => {
               handleViewProfileDetailsUser(user);
             }}
           />
-          <TableMoreMenuItem
+          {/* <TableMoreMenuItem
             Icon={Edit}
             title="Edit"
             handleClick={() => {
               handleCloseOpenMenu();
               handleEditUser(user);
             }}
-          />
-          <TableMoreMenuItem
+          /> */}
+          {/* <TableMoreMenuItem
             Icon={DeleteOutline}
             title="Delete"
             handleClick={() => {
               handleCloseOpenMenu();
-              handleDeleteUser(user.id);
+              setIsOpen(true)
             }}
-          />
+          /> */}
         </TableMoreMenu>
       </TableCell>
+          <ConfirmationDialog title={"Delete Campaign"} 
+            description={"Are you sure you want to delete this campaign? This action cannot be undone."} 
+            confirmTitle={"Delete"} 
+            cancelTitle={"Cancel"} 
+            isOpen={isOpen}
+            handleConfirm={handleConfirm} />
     </TableRow>
   );
 };

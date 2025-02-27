@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { TabList } from "@mui/lab";
 import { Button, styled } from "@mui/material";
 // CUSTOM DEFINED HOOK
@@ -9,9 +9,13 @@ import { Paragraph } from "@/components/typography";
 import { FlexBetween, FlexBox } from "@/components/flexbox";
 // CUSTOM ICON COMPONENTS
 // import GroupSenior from "@/icons/GroupSenior";
+import Add from "@/icons/Add";
 // import AddUserForm from "./AddUserForm";
+import { Modal } from "@/components/modal";
+import DownloadIcon from "@/icons/DownloadIcon";
+import DeleteOutlined from "@/icons/DeleteOutlined";
 import DownloadOutlined from "@/icons/DownloadOutlined";
-import { useSnackbar } from "@/contexts/snackbarContext";
+// import AddCompaignForm from "./AddCompaignForm";
 
 // STYLED COMPONENT
 const TabListWrapper = styled(TabList)(({ theme }) => ({
@@ -26,26 +30,46 @@ type HeadingAreaProps = {
 // ===================================================================
 
 const HeadingArea: FC<HeadingAreaProps> = () => {
-  const showSnackbar = useSnackbar();
+  // const [isEdit, setIsEdit] = useState(false);
+  // const [openModal, setOpenModal] = useState(false);
+  // const handleCloseModal = () => setOpenModal(false);
+
+  // const navigate = useNavigate();
+
   return (
     <FlexBetween flexWrap="wrap" gap={1}>
-      <FlexBox alignItems="center">
+      <FlexBox pb={3} alignItems="center">
         {/* <IconWrapper>
           <GroupSenior sx={{ color: "primary.main" }} />
         </IconWrapper> */}
 
-        <Paragraph fontSize={16}>Invoices</Paragraph>
+        <Paragraph fontSize={16}>Tickets</Paragraph>
       </FlexBox>
 
+      {/* <FlexBox gap={1}>
 
         <Button
           variant="contained"
           startIcon={<DownloadOutlined />}
-          onClick={() => {showSnackbar('Title', 'This is a description');}}
+          // onClick={() => {setOpenModal(true)}}
         >
-          Export Invoices
+          Generate Report
         </Button>
-       
+        <Button
+          variant="contained"
+          startIcon={<Add />}
+          onClick={() => {setOpenModal(true)}}
+        >
+          New Campaign
+        </Button>
+      </FlexBox> */}
+
+      {/* <Modal open={openModal} handleClose={handleCloseModal}>
+        <AddCompaignForm
+          handleCancel={handleCloseModal}
+          // data={isEdit ? data : null}
+        />
+      </Modal> */}
     </FlexBetween>
   );
 };

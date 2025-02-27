@@ -1,7 +1,7 @@
-// import SupportPageView from "@/page-sections/admin/support/page-view";
+import SupportPageView from "@/page-sections/admin/support/page-view";
 
-// const SupportPage = () => {
-//   return <SupportPageView />;
-// };
+const SupportPage = () => {
+  return <SupportPageView />;
+};
 
-// export default SupportPage;
+export default SupportPage;

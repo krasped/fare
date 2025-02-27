@@ -29,9 +29,8 @@ const Layout: FC<LayoutProps> = ({ children, handleTabList }) => {
     <Fragment>
       <Card sx={{ position: "relative", paddingLeft: 3 }}>
         <StyledTabList variant="scrollable" onChange={handleTabList}>
-          <Tab disableRipple label="Wallet Management" value="1" />
-          <Tab disableRipple label="Invoice Tracking" value="2" />
-          <Tab disableRipple label="Refund Approvals" value="3" />
+          <Tab disableRipple label="Agent Analytics" value="1" />
+          <Tab disableRipple label="Marketing Analytics" value="2" />
         </StyledTabList>
       </Card>
 

@@ -1,4 +1,47 @@
+import { Box, Grid } from "@mui/material";
+// CUSTOM PAGE SECTION COMPONENTS
+import { H6, Paragraph } from "@/components/typography";
+import { SyntheticEvent, useState } from "react";
+import { TabContext, TabPanel } from "@mui/lab";
+import Layout from "../Layout";
+import ManageTickets from "../manage";
+import TicketHistory from "../history";
 
+export enum Statuses {
+  high = "high",
+  medium = "medium",
+  low = "low",
+}
+
+const SupportPageView = () => {
+  const [tabValue, setTabValue] = useState("1");
+  const handleTabChange = (_: SyntheticEvent, value: string) =>
+    setTabValue(value);
+  return (
+    <Box pt={2} pb={4}>
+      <H6 fontSize={18}>Support Dashboard</H6>
+      <Paragraph color="text.secondary" mb={3}>
+        Manage and track support tickets.
+      </Paragraph>
+      <TabContext value={tabValue}>
+
+        <Layout handleTabList={handleTabChange}>
+          <TabPanel value="1">
+            <ManageTickets />
+          </TabPanel>
+
+          <TabPanel value="2">
+            <TicketHistory />
+          </TabPanel>
+          
+        </Layout>
+      </TabContext>
+
+    </Box>
+  );
+};
+
+export default SupportPageView;
 // import { useState } from "react"
 // import { Ticket, History } from "lucide-react"
 // import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"

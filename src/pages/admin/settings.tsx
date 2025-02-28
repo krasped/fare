@@ -1,7 +1,7 @@
-// import SettingsPageView from "@/page-sections/admin/settings/page-view";
+import SettingsPageView from "@/page-sections/admin/settings/page-view";
 
-// const SettingsPage = () => {
-//   return <SettingsPageView />;
-// };
+const SettingsPage = () => {
+  return <SettingsPageView />;
+};
 
-// export default SettingsPage;
+export default SettingsPage;

@@ -9,16 +9,26 @@ import {
   IconButton,
   useMediaQuery,
   MenuItem,
+  Switch,
+  styled,
 } from "@mui/material";
 import { CameraAlt } from "@mui/icons-material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 // CUSTOM COMPONENTS
-import { H5 } from "@/components/typography";
+import { H5, Paragraph } from "@/components/typography";
 import { Scrollbar } from "@/components/scrollbar";
 import { AvatarBadge } from "@/components/avatar-badge";
 import { Roles } from "@/components/auth/RoleBasedGuard";
+import { Statuses } from "./page-view";
+import { useSnackbar } from "@/contexts/snackbarContext";
+import { FlexBetween } from "@/components/flexbox";
+
+const SwitchWrapper = styled(FlexBetween)({
+  width: "100%",
+  padding: "10px"
+});
 
 // ==========================================================================
 type AddCompaignFormProps = { handleCancel: () => void; data?: any };
@@ -26,6 +36,7 @@ type AddCompaignFormProps = { handleCancel: () => void; data?: any };
 
 const AddCompaignForm: FC<AddCompaignFormProps> = ({ handleCancel, data }) => {
   const downSm = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
+  const showSnackbar = useSnackbar();
 
   const ALL_ROLES = [
       { id: 1, name: "Admin", value: Roles.admin },
@@ -38,16 +49,42 @@ const AddCompaignForm: FC<AddCompaignFormProps> = ({ handleCancel, data }) => {
       { id: 1, name: "Premier Group", value: "Premier Group" },
       { id: 2, name: "Elit Realty", value: "Elit Realty" },
     ];
+  const DESTINATION = [
+      { id: 1, name: "USA", value: "USA" },
+      { id: 2, name: "UK", value: "UK" },
+      { id: 3, name: "Canada", value: "Canada" },
+      { id: 4, name: "Australia", value: "Australia" },
+      { id: 5, name: "Germany", value: "Germany" },
+      { id: 6, name: "France", value: "France" },
+    ];
+  const WATSUP = [
+      { id: 1, name: "+2342345234", value: "+2342345234" },
+      { id: 2, name: "+125345234", value: "+125345234" },
+    ];
+  const PLATFORMS = [
+      { id: 1, name: "Facebook", value: "Premier Group" },
+      { id: 2, name: "Instagram", value: "Instagram" },
+      { id: 3, name: "Google", value: "Google" },
+      { id: 4, name: "Twitter", value: "Twitter" },
+      { id: 5, name: "Linkedin", value: "Linkedin" },
+    ];
+  const STATUSES = [
+      { id: 1, name: "Waiting for approval", value: Statuses.pending },
+      { id: 2, name: "Approved", value: Statuses.active },
+      { id: 3, name: "Not approved", value: Statuses.inactive },
+    ];
 
   const initialValues = {
-    name: data?.name || "",
-    agency: "",
-    parentAgency: "",
-    role: "",
-    // birthday: "",
-    // company: data?.company || "",
-    email: data?.email || "",
-    phone: data?.phone || "",
+    campaignId: data?.id || "",
+    creationDate: data?.createdAt || "",
+    destination: data?.targetDestination || "",
+    whatsappNumber: "",
+    leadyaConnected: data?.leadyaConnected || "",
+    campaignLink: data?.campaignLink || "",
+    numberOfAds: data?.totalAds || "",
+    platforms: data?.platform || "",
+    dailyBudget: data?.dailyBudget || "",
+    status: data?.status || "",
   };
 
   const validationSchema = Yup.object({
@@ -76,7 +113,7 @@ const AddCompaignForm: FC<AddCompaignFormProps> = ({ handleCancel, data }) => {
   } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: (values) => console.log(values),
+    onSubmit: (values) => showSnackbar("Campaign created", "Your campaign has been created successfully."),
   });
 
   return (
@@ -86,105 +123,110 @@ const AddCompaignForm: FC<AddCompaignFormProps> = ({ handleCancel, data }) => {
       </H5>
       <form onSubmit={handleSubmit}>
         <Scrollbar autoHide={false} style={{ maxHeight: downSm ? 300 : "" }}>
-          {/* <Stack direction="row" justifyContent="center" mb={6}>
-            <AvatarBadge
-              badgeContent={
-                <label htmlFor="icon-button-file">
-                  <input
-                    type="file"
-                    accept="image/*"
-                    id="icon-button-file"
-                    style={{ display: "none" }}
-                  />
-
-                  <IconButton aria-label="upload picture" component="span">
-                    <CameraAlt
-                      sx={{ fontSize: 16, color: "background.paper" }}
-                    />
-                  </IconButton>
-                </label>
-              }
-            >
-              <Avatar
-                src={data?.avatar || "/static/avatar/001-man.svg"}
-                sx={{ width: 80, height: 80, backgroundColor: "grey.100" }}
-              />
-            </AvatarBadge>
-          </Stack> */}
+         
 
           <Grid container spacing={3}>
             <Grid item sm={6} xs={12}>
               <TextField
                 fullWidth
-                name="name"
-                label="Full Name"
+                name="campaignId"
+                label="Campaign ID"
                 variant="outlined"
                 onBlur={handleBlur}
-                value={values.name}
+                disabled
+                value={values.campaignId}
                 onChange={handleChange}
-                error={Boolean(errors.name && touched.name)}
-                helperText={(touched.name && errors.name) as string}
               />
             </Grid>
 
             <Grid item sm={6} xs={12}>
               <TextField
                 fullWidth
-                name="agency"
-                label="Agency Name"
+                name="creationDate"
+                label="Creation Date"
+                disabled
                 variant="outlined"
                 onBlur={handleBlur}
-                value={values.agency}
+                value={values.creationDate}
                 onChange={handleChange}
-                error={Boolean(errors.agency && touched.agency)}
-                helperText={touched.agency && errors.agency}
               />
             </Grid>
-{/* 
             <Grid item sm={6} xs={12}>
-              <DatePicker
-                label="Birthday"
-                value={values.birthday}
-                onChange={(date) => setFieldValue("birthday", date)}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    fullWidth
-                    name="birthday"
-                    onBlur={handleBlur}
-                    error={Boolean(errors.birthday && touched.birthday)}
-                    helperText={(touched.birthday && errors.birthday) as string}
-                  />
-                )}
-              />
-            </Grid> */}
+              <TextField
+                name="destination"
+                select
+                fullWidth
+                variant="outlined"
+                label="Destination"
+                value={values.destination}
+                onBlur={handleBlur}
+                onChange={handleChange}
+                error={Boolean(errors.destination && touched.destination)}
+                helperText={(touched.destination && errors.destination) as string}
+              >
+                {DESTINATION.map(({ id, name, value }) => (
+                  <MenuItem key={id} value={value}>
+                    {name}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </Grid>
+            <Grid item sm={6} xs={12}>
+              <TextField
+                name="whatsappNumber"
+                select
+                fullWidth
+                variant="outlined"
+                label="WhatsApp Number"
+                value={values.whatsappNumber}
+                onBlur={handleBlur}
+                onChange={handleChange}
+                error={Boolean(errors.whatsappNumber && touched.whatsappNumber)}
+                helperText={(touched.whatsappNumber && errors.whatsappNumber) as string}
+              >
+                {WATSUP.map(({ id, name, value }) => (
+                  <MenuItem key={id} value={value}>
+                    {name}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </Grid>
+
+            <Grid item sm={6} xs={12}>
+              <SwitchWrapper>
+                <Paragraph display="block" fontWeight={400}>
+                  Leadya Connected
+                </Paragraph>
+
+                <Switch defaultChecked />
+              </SwitchWrapper>
+            </Grid>
 
             <Grid item sm={6} xs={12}>
               <TextField
                 fullWidth
-                name="email"
-                type="email"
-                label="Email"
+                name="campaignLink"
+                label="Campaign Link"
                 variant="outlined"
                 onBlur={handleBlur}
-                value={values.email}
+                value={values.campaignLink}
                 onChange={handleChange}
-                error={Boolean(errors.email && touched.email)}
-                helperText={(touched.email && errors.email) as string}
+                error={Boolean(errors.campaignLink && touched.campaignLink)}
+                helperText={(touched.campaignLink && errors.campaignLink) as string}
               />
             </Grid>
-
             <Grid item sm={6} xs={12}>
               <TextField
                 fullWidth
-                name="phone"
-                label="Phone Number"
+                name="numberOfAds"
+                label="Number of Ads"
+                type="number"
                 variant="outlined"
                 onBlur={handleBlur}
-                value={values.phone}
+                value={values.numberOfAds}
                 onChange={handleChange}
-                error={Boolean(errors.phone && touched.phone)}
-                helperText={(touched.phone && errors.phone) as string}
+                error={Boolean(errors.numberOfAds && touched.numberOfAds)}
+                helperText={(touched.numberOfAds && errors.numberOfAds) as string}
               />
             </Grid>
 
@@ -192,16 +234,17 @@ const AddCompaignForm: FC<AddCompaignFormProps> = ({ handleCancel, data }) => {
               <TextField
                 name="parentAgency"
                 select
+                multiline
                 fullWidth
                 variant="outlined"
-                label="Parent Agency"
-                value={values.parentAgency}
+                label="Platforms"
+                value={values.platforms}
                 onBlur={handleBlur}
                 onChange={handleChange}
-                error={Boolean(errors.parentAgency && touched.parentAgency)}
-                helperText={(touched.parentAgency && errors.parentAgency) as string}
+                error={Boolean(errors.platforms && touched.platforms)}
+                helperText={(touched.platforms && errors.platforms) as string}
               >
-                {ALL_PARENTS.map(({ id, name, value }) => (
+                {PLATFORMS.map(({ id, name, value }) => (
                   <MenuItem key={id} value={value}>
                     {name}
                   </MenuItem>
@@ -211,18 +254,33 @@ const AddCompaignForm: FC<AddCompaignFormProps> = ({ handleCancel, data }) => {
 
             <Grid item sm={6} xs={12}>
               <TextField
-                name="role"
+                fullWidth
+                name="dailyBudget"
+                label="Daily Budget"
+                type="number"
+                variant="outlined"
+                onBlur={handleBlur}
+                value={values.dailyBudget}
+                onChange={handleChange}
+                error={Boolean(errors.dailyBudget && touched.dailyBudget)}
+                helperText={(touched.dailyBudget && errors.dailyBudget) as string}
+              />
+            </Grid>
+
+            <Grid item sm={6} xs={12}>
+              <TextField
+                name="status"
                 select
                 fullWidth
                 variant="outlined"
-                label="Role"
-                value={values.role}
+                label="Status"
+                value={values.status}
                 onBlur={handleBlur}
                 onChange={handleChange}
-                error={Boolean(errors.role && touched.role)}
-                helperText={(touched.role && errors.role) as string}
+                error={Boolean(errors.status && touched.status)}
+                helperText={(touched.status && errors.status) as string}
               >
-                {ALL_ROLES.map(({ id, name, value }) => (
+                {STATUSES.map(({ id, name, value }) => (
                   <MenuItem key={id} value={value}>
                     {name}
                   </MenuItem>

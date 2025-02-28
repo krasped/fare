@@ -14,7 +14,7 @@ import CameraAlt from "@mui/icons-material/CameraAlt";
 import TabList from "@mui/lab/TabList";
 // CUSTOM COMPONENTS
 import { AvatarBadge } from "@/components/avatar-badge";
-import { H6, Paragraph } from "@/components/typography";
+import { H5, H6, Paragraph } from "@/components/typography";
 import { FlexBetween, FlexBox } from "@/components/flexbox";
 // ICON COMPONENTS
 import DateRange from "@/icons/DateRange";
@@ -23,29 +23,30 @@ import MapMarkerIcon from "@/icons/MapMarkerIcon";
 // CUSTOM UTILS METHOD
 import { format } from "@/utils/currency";
 import { AvatarLoading } from "@/components/avatar-loading";
+import { Statuses, User } from "../page-view";
+import { StatusBadge } from "@/components/status-badge";
 
-const agentProfile = {
-  name: "John Smith",
-  type: "Agency",
-  location: "Paris",
-  joinDate: "March 15, 2023",
-  avatar: "/placeholder.svg",
-  summary: "Experienced travel agency with over 10 years in luxury travel planning. Specializing in European destinations and customized tour packages.",
-  agents: [
-    { name: "Sarah Johnson", role: "Junior Agent", avatar: "/placeholder.svg", location: "Paris" },
-    { name: "Mike Wilson", role: "Senior Agent", avatar: "/placeholder.svg", location: "Lyon" },
-  ],
-  documents: [
-    { name: "Bank Account Approval", status: "Verified", date: "2023-04-01" },
-    { name: "Company Registration", status: "Verified", date: "2023-03-15" },
-    { name: "Insurance Certificate", status: "Pending", date: "2024-03-20" },
-  ],
-};
+// const agentProfile = {
+//   name: "John Smith",
+//   type: "Agency",
+//   location: "Paris",
+//   joinDate: "March 15, 2023",
+//   avatar: "/placeholder.svg",
+//   summary: "Experienced travel agency with over 10 years in luxury travel planning. Specializing in European destinations and customized tour packages.",
+//   agents: [
+//     { name: "Sarah Johnson", role: "Junior Agent", avatar: "/placeholder.svg", location: "Paris" },
+//     { name: "Mike Wilson", role: "Senior Agent", avatar: "/placeholder.svg", location: "Lyon" },
+//   ],
+//   documents: [
+//     { name: "Bank Account Approval", status: "Verified", date: "2023-04-01" },
+//     { name: "Company Registration", status: "Verified", date: "2023-03-15" },
+//     { name: "Insurance Certificate", status: "Pending", date: "2024-03-20" },
+//   ],
+// };
 
 // STYLED COMPONENTS
 const ContentWrapper = styled("div")({
   zIndex: 1,
-  padding: 24,
   // marginTop: 55,
   position: "relative",
 });
@@ -75,23 +76,23 @@ const StyledTabList = styled(TabList)(({ theme }) => ({
 
 // =======================================================================
 type LayoutProps = {
+  data?: User|undefined;
   children: ReactNode;
   handleTabList: (_: SyntheticEvent, value: string) => void;
 };
 // =======================================================================
 
-const Layout: FC<LayoutProps> = ({ children, handleTabList }) => {
+const Layout: FC<LayoutProps> = ({ children, handleTabList, data }) => {
   return (
     <Fragment>
-        < Box sx={{ mb: 2 }}>
+        {/* < Box sx={{ mb: 2 }}>
           <Typography variant="h4" sx={{ fontWeight: 'bold', fontSize: '2.5rem', lineHeight: 1.2 }}>
             Profile
           </Typography>
           <Typography variant="body1" color="text.secondary">
             Manage your profile information
           </Typography>
-        </Box>
-      <Card sx={{ position: "relative", paddingTop: 3, paddingLeft: 3 }}>
+        </Box> */}
         {/* <CoverPicWrapper>
           <img
             width="100%"
@@ -103,56 +104,31 @@ const Layout: FC<LayoutProps> = ({ children, handleTabList }) => {
         </CoverPicWrapper> */}
 
         <ContentWrapper>
-          <FlexBox justifyContent="center">
-            <AvatarBadge
-              badgeContent={
-                <label htmlFor="icon-button-file">
-                  <input
-                    type="file"
-                    accept="image/*"
-                    id="icon-button-file"
-                    style={{ display: "none" }}
-                  />
 
-                  <IconButton aria-label="upload picture" component="span">
-                    <CameraAlt
-                      sx={{ fontSize: 16, color: "background.paper" }}
-                    />
-                  </IconButton>
-                </label>
-              }
-            >
-              <AvatarLoading
-                alt={agentProfile.name}
-                borderSize={2}
-                percentage={60}
-                src={agentProfile.avatar}
-                sx={{ width: 100, height: 100 }}
-              />
-            </AvatarBadge>
-          </FlexBox>
-
-          <Box mt={2}>
+          <Box>
             <H6 fontSize={18} textAlign="center">
-              {agentProfile.name}
+              {data?.name}
             </H6>
-
-            <StyledFlexBetween paddingTop={1} maxWidth={340}>
-              <ListItem title={agentProfile.type} Icon={Bratislava} />
-              <ListItem title={agentProfile.location} Icon={MapMarkerIcon} />
-              <ListItem title={agentProfile.joinDate} Icon={DateRange} />
-            </StyledFlexBetween>
+            <Typography mt={2} textAlign="center" variant="body1" color="text.secondary">
+              {data?.email}
+            </Typography>
+            <FlexBox mt={1} justifyContent={"center"}>
+              <StatusBadge type={data?.status === Statuses.active ? "success" : (data?.status === Statuses.pending ? "warning" : "error")}>
+                {data?.status}
+              </StatusBadge>
+            </FlexBox>
           </Box>
 
           
         </ContentWrapper>
 
         <StyledTabList variant="scrollable" onChange={handleTabList}>
-          <Tab disableRipple label="Overview" value="1" />
-          <Tab disableRipple label="Agency" value="2" />
+          <Tab disableRipple label="General Info" value="1" />
+          <Tab disableRipple label="Approval Workflow" value="2" />
           <Tab disableRipple label="Documents" value="3" />
+          <Tab disableRipple label="Subscription" value="4" />
+          <Tab disableRipple label="Activity Log" value="5" />
         </StyledTabList>
-      </Card>
 
       {children || <Outlet />}
     </Fragment>

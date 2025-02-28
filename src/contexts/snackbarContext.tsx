@@ -1,9 +1,9 @@
 import React, { createContext, useContext, useState, useCallback, PropsWithChildren } from 'react';
 import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
+import MuiAlert, { AlertColor } from '@mui/material/Alert';
 
 
-type SnackbarContextType = (title: string, description: string) => void;
+type SnackbarContextType = (title: string, description: string, color?: string) => void;
 
 const SnackbarContext = createContext<SnackbarContextType | undefined>(undefined)
 
@@ -18,13 +18,17 @@ export const useSnackbar = (): SnackbarContextType => {
 };
 
 export const SnackbarProvider = ({ children }: PropsWithChildren) => {
-    const [snackbar, setSnackbar] = useState({ open: false, title: '', description: '' });
-
-    const showSnackbar = useCallback((title:string, description: string) => {
-        setSnackbar({ open: true, title, description });
+    const [snackbar, setSnackbar] = useState({ open: false, title: '', description: '', color: 'info' });
+    let timouot: string | number | NodeJS.Timeout | undefined;
+    const showSnackbar = useCallback((title:string, description: string, color="info") => {
+        clearTimeout(timouot);
         setTimeout(() => {
-            setSnackbar((prev) => ({ ...prev, open: false }));
-        }, 3000);
+            setSnackbar({ open: true, title, description, color });
+            timouot = setTimeout(() => {
+                setSnackbar((prev) => ({ ...prev, open: false }));
+            }, 3000);
+        })
+        
     }, []);
 
     return (
@@ -33,10 +37,10 @@ export const SnackbarProvider = ({ children }: PropsWithChildren) => {
             <Snackbar
                 open={snackbar.open}
                 anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                onClose={() => setSnackbar((prev) => ({ ...prev, open: false }))}
+                onClose={() => setSnackbar((prev) => ({ ...prev, open: false, color: 'info' }))}
                 autoHideDuration={3000}
             >
-                <MuiAlert onClose={() => setSnackbar((prev) => ({ ...prev, open: false }))} severity="info">
+                <MuiAlert onClose={() => setSnackbar((prev) => ({ ...prev, open: false }))} severity={snackbar?.color ? (snackbar?.color as AlertColor) : "info"}>
                     <strong>{snackbar.title}</strong> {snackbar.description}
                 </MuiAlert>
             </Snackbar>

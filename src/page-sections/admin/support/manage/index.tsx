@@ -1,19 +1,20 @@
-import { Box, Button, Card, Grid, Table, TableBody, TableContainer, TablePagination } from "@mui/material";
+import { Box, Button, Card, Grid, IconButton, Table, TableBody, TableContainer, TablePagination } from "@mui/material";
 // CUSTOM PAGE SECTION COMPONENTS
 import { H6, Paragraph } from "@/components/typography";
 import FromLastMonth from "../FromLastMonth";
 import { FlexBox } from "@/components/flexbox";
-import { DownloadOutlined } from "@mui/icons-material";
+import { Close, DownloadOutlined } from "@mui/icons-material";
 import { useSnackbar } from "@/contexts/snackbarContext";
 import HeadingArea from "./HeadingArea";
 import SearchArea, { ResolutionStatus, TicketCategory, TicketPriority, TicketStatus } from "./SearchArea";
-import { BigModal } from "@/components/modal";
+import { BigModal, Modal } from "@/components/modal";
 import { Scrollbar } from "@/components/scrollbar";
 import UserTableHead from "./UserTableHead";
 import UserTableRow from "./UserTableRow";
 import { SyntheticEvent, useState } from "react";
 import useMuiTable, { getComparator, stableSort } from "@/hooks/useMuiTable";
 import { TableDataNotFound } from "@/components/table";
+import ViewManageForm from "./ViewManageForm";
 
 
 
@@ -98,6 +99,7 @@ const ManageTickets = () => {
   // const [isEdit, setIsEdit] = useState(false);
   // const [openModal, setOpenModal] = useState(false);
   const [openViewUser, setOpenViewUser] = useState(false);
+  const handleCloseModal = ()=> setOpenViewUser(false)
   const [data, setData] = useState<Ticket>();
 
   const {
@@ -219,6 +221,24 @@ const ManageTickets = () => {
                   {filteredUsers.length === 0 && <TableDataNotFound />}
                 </TableBody>
               </Table>
+              <Modal open={openViewUser} handleClose={handleCloseModal}>
+                <IconButton
+                  aria-label="close"
+                  onClick={() => handleCloseModal()}
+                  sx={(theme) => ({
+                    position: 'absolute',
+                    right: 8,
+                    top: 8,
+                    color: theme.palette.grey[500],
+                  })}
+                >
+                  <Close />
+                </IconButton>
+                <ViewManageForm
+                  handleClose={handleCloseModal}
+                  data={data}
+                />
+              </Modal>
             </Scrollbar>
           </TableContainer>
 

@@ -1,4 +1,4 @@
-import { FC, ReactNode } from "react";
+import { FC, ReactNode, useState } from "react";
 import {
   Grid,
   Stack,
@@ -11,7 +11,8 @@ import {
   MenuItem,
   styled,
 } from "@mui/material";
-import { CameraAlt } from "@mui/icons-material";
+import { Modal } from "@/components/modal";
+import { CameraAlt, Edit } from "@mui/icons-material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -20,16 +21,19 @@ import { H5, Paragraph, Span } from "@/components/typography";
 import { Scrollbar } from "@/components/scrollbar";
 import { AvatarBadge } from "@/components/avatar-badge";
 import { Roles } from "@/components/auth/RoleBasedGuard";
-import { Refund } from ".";
 import { useSnackbar } from "@/contexts/snackbarContext";
+import { Campaign } from "./page-view";
+import { FlexBetween } from "@/components/flexbox";
+import AddUserForm from "./EditHeadLineForm";
 
 // ==========================================================================
-type RefundFormProps = { handleCancel: () => void; data?: Refund };
+type RefundFormProps = { handleClose: () => void; data?: Campaign };
 // ==========================================================================
 
-const RefundForm: FC<RefundFormProps> = ({ handleCancel, data }) => {
+const ViewCompaignForm: FC<RefundFormProps> = ({ handleClose, data }) => {
   const showSnackbar = useSnackbar();
-
+  const [openEditHeadlines, setOpenEditHeadlines] = useState(false);
+  const handleCloseModal = () => {setOpenEditHeadlines(false)}
   const downSm = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
 
   const ALL_ROLES = [
@@ -45,9 +49,13 @@ const RefundForm: FC<RefundFormProps> = ({ handleCancel, data }) => {
     ];
 
   const initialValues = {
-    agentName: data?.agentName || "",
-    amount: data?.amount || "",
-    orderId: data?.orderId || "",
+    headline: data?.headline || "",
+    description: data?.description || "",
+    targetDestination: data?.targetDestination || "",
+    startDate: data?.startDate || "",
+    endDate: data?.endDate || "",
+    displayPlatforms: data?.displayPlatforms || "",
+    totalAds: data?.totalAds || "",
   };
 
   const validationSchema = Yup.object({
@@ -76,7 +84,7 @@ const RefundForm: FC<RefundFormProps> = ({ handleCancel, data }) => {
   } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: (values) => {},
+    onSubmit: (values) => {handleClose()},
   });
 
   const StyledBox = styled("div")(({ theme }) => ({
@@ -88,7 +96,7 @@ const RefundForm: FC<RefundFormProps> = ({ handleCancel, data }) => {
   return (
     <div>
       <H5 fontSize={16}>
-        {data ? "Refund Details - " + data.id : "Refund Details"}
+        {data ? "" + data?.name || data?.id : "Details"}
       </H5>
       <form onSubmit={handleSubmit}>
         <Scrollbar autoHide={false} style={{ maxHeight: downSm ? 300 : "" }}>
@@ -123,68 +131,53 @@ const RefundForm: FC<RefundFormProps> = ({ handleCancel, data }) => {
             <StyledBox>
 
             <Stack spacing={2}>
-
-                <ListItem text="Agent Information:" description={values.agentName} />
+                <FlexBetween>
+                  <ListItem text="Campaign Headline:" description={values.headline} />
+                   <IconButton onClick={() => {setOpenEditHeadlines(true)}}>
+                        <Edit fontSize="small" />
+                    </IconButton>
+                </FlexBetween>
                 <ListItem
-                  text="Amount:"
-                  description={"$"+values.amount}
+                  text="Description:"
+                  description={values.description}
                 />
                 <ListItem
-                  text="Order Id"
-                  description={values.orderId}
+                  text="Target Destination"
+                  description={values.targetDestination}
+                />
+                <FlexBetween>
+
+                  <ListItem
+                    text="Start Date"
+                    description={values.startDate}
+                  />
+                  <ListItem
+                    text="End Date"
+                    description={values.endDate}
+                  />
+                </FlexBetween>
+                <ListItem
+                  text="Display Platforms"
+                  description={(values.displayPlatforms as string[]).join(", ")}
+                />
+                <ListItem
+                  text="Number of Ads"
+                  description={values.totalAds}
                 />
             </Stack>
             </StyledBox>
-              {/* <TextField
-                fullWidth
-                name="agentName"
-                label="Agent Information"
-                variant="outlined"
-                onBlur={handleBlur}
-                value={values.agentName}
-                onChange={handleChange}
-                error={Boolean(errors.agentName && touched.agentName)}
-                helperText={(touched.agentName && errors.agentName) as string}
-              />
-            </Grid>
-
-            <Grid item sm={6} xs={12}>
-              <TextField
-                fullWidth
-                name="amount"
-                label="Amount"
-                variant="outlined"
-                // onBlur={handleBlur}
-                value={"$"+values.amount}
-                // onChange={handleChange}
-                // error={Boolean(errors.amount && touched.amount)}
-                // helperText={touched.amount && errors.amount}
-              />
-            </Grid>
-            <Grid item sm={6} xs={12}>
-              <TextField
-                fullWidth
-                name="orderId"
-                label="Order Id"
-                variant="outlined"
-                // onBlur={handleBlur}
-                value={values.orderId}
-                // onChange={handleChange}
-                // error={Boolean(errors.orderId && touched.orderId)}
-                // helperText={(touched.orderId && errors.orderId) as string}
-              />
-            </Grid> */}
+              
           </Grid>
         </Scrollbar>
 
         <Stack direction="row" alignItems="center" spacing={1} mt={4}>
           <Button color="success" onClick={() =>{
             showSnackbar(
-              `Refund "Approved"}`,
-              `Refund ${data?.id} has been approved .`
+              `Campaign Activated`,
+              `The campaign "${data?.name}" has been activated.`
             )
           }} type="submit" size="small">
-            Approve
+            Activate
           </Button>
 
           <Button
@@ -193,16 +186,23 @@ const RefundForm: FC<RefundFormProps> = ({ handleCancel, data }) => {
             color="error"
             onClick={() => {
               showSnackbar(
-                `Refund Rejected`,
-                `Refund ${data?.id} has been rejected.`
+                `Campaign Deactivated`,
+                `The campaign "${data?.name}" has been deactivated.`
               )
+              handleClose()
               // handleCancel
             }}
           >
-            Reject
+            Deactivate
           </Button>
         </Stack>
       </form>
+      <Modal open={openEditHeadlines} handleClose={handleCloseModal}>
+        <AddUserForm
+          handleCancel={handleCloseModal}
+          data={data}
+        />
+      </Modal>
     </div>
   );
 };
@@ -224,4 +224,4 @@ function ListItem({
   );
 }
 
-export default RefundForm;
+export default ViewCompaignForm;

@@ -1,3 +1,43 @@
+import { Box, Grid } from "@mui/material";
+// CUSTOM PAGE SECTION COMPONENTS
+import { H6, Paragraph } from "@/components/typography";
+import { SyntheticEvent, useState } from "react";
+import { TabContext, TabPanel } from "@mui/lab";
+import AccountSettings from "../account";
+import Layout from "../Layout";
+import SystemSettings from "../system";
+
+const SettingsPageView = () => {
+  const [tabValue, setTabValue] = useState("1");
+  const handleTabChange = (_: SyntheticEvent, value: string) =>
+    setTabValue(value);
+  return (
+    <Box pt={2} pb={4}>
+      <H6 fontSize={18}>Settings</H6>
+      <Paragraph color="text.secondary" mb={3}>
+        Manage your account settings and system preferences.
+      </Paragraph>
+      <TabContext value={tabValue}>
+
+        <Layout handleTabList={handleTabChange}>
+          <TabPanel value="1">
+            <AccountSettings />
+          </TabPanel>
+
+          <TabPanel value="2">
+            <SystemSettings />
+          </TabPanel>
+          
+        </Layout>
+      </TabContext>
+
+    </Box>
+  );
+};
+
+export default SettingsPageView;
+
+
 // import { useState } from "react";
 // import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 // import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";

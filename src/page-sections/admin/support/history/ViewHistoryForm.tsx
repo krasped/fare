@@ -1,4 +1,4 @@
-import { FC, ReactNode } from "react";
+import { FC, ReactNode, useState } from "react";
 import {
   Grid,
   Stack,
@@ -10,8 +10,10 @@ import {
   useMediaQuery,
   MenuItem,
   styled,
+  Divider,
 } from "@mui/material";
-import { CameraAlt } from "@mui/icons-material";
+import { Modal } from "@/components/modal";
+import { CameraAlt, Edit } from "@mui/icons-material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -20,16 +22,18 @@ import { H5, Paragraph, Span } from "@/components/typography";
 import { Scrollbar } from "@/components/scrollbar";
 import { AvatarBadge } from "@/components/avatar-badge";
 import { Roles } from "@/components/auth/RoleBasedGuard";
-import { Refund } from ".";
 import { useSnackbar } from "@/contexts/snackbarContext";
+import { FlexBetween } from "@/components/flexbox";
+import { Ticket } from ".";
 
 // ==========================================================================
-type RefundFormProps = { handleCancel: () => void; data?: Refund };
+type RefundFormProps = { handleClose: () => void; data?: Ticket };
 // ==========================================================================
 
-const RefundForm: FC<RefundFormProps> = ({ handleCancel, data }) => {
+const ViewTicketForm: FC<RefundFormProps> = ({ handleClose, data }) => {
   const showSnackbar = useSnackbar();
-
+  const [openEditHeadlines, setOpenEditHeadlines] = useState(false);
+  const handleCloseModal = () => {setOpenEditHeadlines(false)}
   const downSm = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
 
   const ALL_ROLES = [
@@ -44,11 +48,15 @@ const RefundForm: FC<RefundFormProps> = ({ handleCancel, data }) => {
       { id: 2, name: "Elit Realty", value: "Elit Realty" },
     ];
 
-  const initialValues = {
-    agentName: data?.agentName || "",
-    amount: data?.amount || "",
-    orderId: data?.orderId || "",
-  };
+  // const initialValues = {
+  //   headline: data?.headline || "",
+  //   description: data?.description || "",
+  //   targetDestination: data?.targetDestination || "",
+  //   startDate: data?.startDate || "",
+  //   endDate: data?.endDate || "",
+  //   displayPlatforms: data?.displayPlatforms || "",
+  //   totalAds: data?.totalAds || "",
+  // };
 
   const validationSchema = Yup.object({
     // name: Yup.string()
@@ -65,19 +73,19 @@ const RefundForm: FC<RefundFormProps> = ({ handleCancel, data }) => {
     // company: Yup.string().required("Company is Required!"),
   });
 
-  const {
-    values,
-    errors,
-    handleSubmit,
-    handleChange,
-    handleBlur,
-    touched,
-    setFieldValue,
-  } = useFormik({
-    initialValues,
-    validationSchema,
-    onSubmit: (values) => {},
-  });
+  // const {
+  //   values,
+  //   errors,
+  //   handleSubmit,
+  //   handleChange,
+  //   handleBlur,
+  //   touched,
+  //   setFieldValue,
+  // } = useFormik({
+  //   initialValues,
+  //   validationSchema,
+  //   onSubmit: (values) => {handleClose()},
+  // });
 
   const StyledBox = styled("div")(({ theme }) => ({
     padding: 24,
@@ -88,9 +96,9 @@ const RefundForm: FC<RefundFormProps> = ({ handleCancel, data }) => {
   return (
     <div>
       <H5 fontSize={16}>
-        {data ? "Refund Details - " + data.id : "Refund Details"}
+        {data ? "Ticket History - " + data?.id : "Ticket History"}
       </H5>
-      <form onSubmit={handleSubmit}>
+      {/* <form onSubmit={handleSubmit}> */}
         <Scrollbar autoHide={false} style={{ maxHeight: downSm ? 300 : "" }}>
           {/* <Stack direction="row" justifyContent="center" mb={6}>
             <AvatarBadge
@@ -123,86 +131,49 @@ const RefundForm: FC<RefundFormProps> = ({ handleCancel, data }) => {
             <StyledBox>
 
             <Stack spacing={2}>
-
-                <ListItem text="Agent Information:" description={values.agentName} />
+                <H5 fontSize={16}>
+                  {data?.subject}
+                </H5>
+                <FlexBetween>
+                  <ListItem text="Category:" description={data?.category} />
+                  <ListItem text="Status:" description={data?.status} />
+                   
+                </FlexBetween>
+                <Divider/>
+                <H5 fontSize={16}>
+                  Description
+                </H5>
                 <ListItem
-                  text="Amount:"
-                  description={"$"+values.amount}
+                  text=""
+                  description={data?.description || "No description provided"}
+                />
+                <Divider/>
+                <H5 fontSize={16}>
+                  Resolution Details
+                </H5>
+                <ListItem
+                  text="Resolution Status"
+                  description={data?.resolutionStatus}
                 />
                 <ListItem
-                  text="Order Id"
-                  description={values.orderId}
+                  text="Resolved By"
+                  description={data?.resolvedBy}
                 />
+                <ListItem
+                  text="Resolution Date"
+                  description={data?.closedAt}
+                />
+                <ListItem
+                  text=""
+                  description={data?.resolutionDetails}
+                />
+               
             </Stack>
             </StyledBox>
-              {/* <TextField
-                fullWidth
-                name="agentName"
-                label="Agent Information"
-                variant="outlined"
-                onBlur={handleBlur}
-                value={values.agentName}
-                onChange={handleChange}
-                error={Boolean(errors.agentName && touched.agentName)}
-                helperText={(touched.agentName && errors.agentName) as string}
-              />
-            </Grid>
-
-            <Grid item sm={6} xs={12}>
-              <TextField
-                fullWidth
-                name="amount"
-                label="Amount"
-                variant="outlined"
-                // onBlur={handleBlur}
-                value={"$"+values.amount}
-                // onChange={handleChange}
-                // error={Boolean(errors.amount && touched.amount)}
-                // helperText={touched.amount && errors.amount}
-              />
-            </Grid>
-            <Grid item sm={6} xs={12}>
-              <TextField
-                fullWidth
-                name="orderId"
-                label="Order Id"
-                variant="outlined"
-                // onBlur={handleBlur}
-                value={values.orderId}
-                // onChange={handleChange}
-                // error={Boolean(errors.orderId && touched.orderId)}
-                // helperText={(touched.orderId && errors.orderId) as string}
-              />
-            </Grid> */}
+              
           </Grid>
         </Scrollbar>
-
-        <Stack direction="row" alignItems="center" spacing={1} mt={4}>
-          <Button color="success" onClick={() =>{
-            showSnackbar(
-              `Refund "Approved"}`,
-              `Refund ${data?.id} has been approved .`
-            )
-          }} type="submit" size="small">
-            Approve
-          </Button>
-
-          <Button
-            variant="outlined"
-            size="small"
-            color="error"
-            onClick={() => {
-              showSnackbar(
-                `Refund Rejected`,
-                `Refund ${data?.id} has been rejected.`
-              )
-              // handleCancel
-            }}
-          >
-            Reject
-          </Button>
-        </Stack>
-      </form>
+      {/* </form> */}
     </div>
   );
 };
@@ -224,4 +195,4 @@ function ListItem({
   );
 }
 
-export default RefundForm;
+export default ViewTicketForm;

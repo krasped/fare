@@ -4,40 +4,54 @@ import {
   Stack,
   Theme,
   Button,
+  Avatar,
   TextField,
+  IconButton,
   useMediaQuery,
   MenuItem,
 } from "@mui/material";
+import { CameraAlt } from "@mui/icons-material";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 // CUSTOM COMPONENTS
 import { H5 } from "@/components/typography";
 import { Scrollbar } from "@/components/scrollbar";
+import { AvatarBadge } from "@/components/avatar-badge";
+import { Roles } from "@/components/auth/RoleBasedGuard";
 import { useSnackbar } from "@/contexts/snackbarContext";
+
 // ==========================================================================
-type AddCompaignFormProps = { handleCancel: () => void; data?: any };
+type AddUserFormProps = { handleCancel: () => void; data?: any };
 // ==========================================================================
 
-const AddCompaignForm: FC<AddCompaignFormProps> = ({ handleCancel, data }) => {
-  const showSnackbar = useSnackbar();
-
+const AddUserForm: FC<AddUserFormProps> = ({ handleCancel, data }) => {
   const downSm = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
+      const showSnackbar = useSnackbar();
 
-  const ALL_AGENTS = [
-    { id: 1, name: "John Doe", value: 1 },
-    { id: 2, name: "Jane Smith", value: 2 },
-    { id: 3, name: "Mike Johnson", value: 3 },
-  ];
+  const ALL_ROLES = [
+      { id: 1, name: "Admin", value: Roles.admin },
+      { id: 2, name: "Agent", value: Roles.agent },
+      { id: 3, name: "sub Agent", value: Roles.subAgent },
+      { id: 4, name: "Manager", value: Roles.manager },
+      { id: 5, name: "Marketing", value: Roles.marketing },
+    ];
+  const ALL_PARENTS = [
+      { id: 1, name: "Premier Group", value: "Premier Group" },
+      { id: 2, name: "Elit Realty", value: "Elit Realty" },
+    ];
 
   const initialValues = {
-    agentName: data?.name || "",
-    amount: 0,
+    headline: data?.headline || "",
+    description: data?.description || "",
   };
 
   const validationSchema = Yup.object({
-    agentName: Yup.string()
-      .required("Agent Name is Required!"),
-    amount: Yup.number(),
+    headline: Yup.string()
+      .min(3, "Must be greater then 3 characters")
+      .required("headline is Required!"),
+    description: Yup.string().required("description is Required!"),
+   
   });
 
   const {
@@ -51,48 +65,43 @@ const AddCompaignForm: FC<AddCompaignFormProps> = ({ handleCancel, data }) => {
   } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: (values) => showSnackbar("Wallet Recharged", `Successfully added $${values.amount} to ${values.agentName}'s wallet.`),
+    onSubmit: (values) => {
+      showSnackbar("Changes Saved","Campaign details have been updated successfully.")
+      handleCancel()},
   });
 
   return (
     <div>
       <H5 fontSize={16} mb={4}>
-        {"Recharge Wallet"}
+        {data ? data?.name : "Edit"}
       </H5>
       <form onSubmit={handleSubmit}>
         <Scrollbar autoHide={false} style={{ maxHeight: downSm ? 300 : "" }}>
-          <Grid container spacing={3}>
+          <Grid container pt={1} spacing={3}>
             <Grid item sm={12} xs={12}>
               <TextField
-                name="agentName"
-                select
                 fullWidth
+                name="headline"
+                label="Campaign Headline"
                 variant="outlined"
-                label="Parent Agency"
-                value={values.agentName}
                 onBlur={handleBlur}
+                value={values.headline}
                 onChange={handleChange}
-                error={Boolean(errors.agentName && touched.agentName)}
-                helperText={(touched.agentName && errors.agentName) as string}
-              >
-                {ALL_AGENTS.map(({ id, name, value }) => (
-                  <MenuItem key={id} value={value}>
-                    {name}
-                  </MenuItem>
-                ))}
-              </TextField>
+                error={Boolean(errors.headline && touched.headline)}
+                helperText={(touched.headline && errors.headline) as string}
+              />
             </Grid>
+
             <Grid item sm={12} xs={12}>
               <TextField
                 fullWidth
-                name="name"
-                label="Amount"
+                name="description"
+                label="Description"
                 variant="outlined"
                 onBlur={handleBlur}
-                value={values.amount}
+                value={values.description}
                 onChange={handleChange}
-                error={Boolean(errors.amount && touched.amount)}
-                helperText={(touched.amount && errors.amount) as string}
+                error={Boolean(errors.description && touched.description)}
               />
             </Grid>
           </Grid>
@@ -100,7 +109,7 @@ const AddCompaignForm: FC<AddCompaignFormProps> = ({ handleCancel, data }) => {
 
         <Stack direction="row" alignItems="center" spacing={1} mt={4}>
           <Button type="submit" size="small">
-            Confirm Recharge
+            Save Changes
           </Button>
 
           <Button
@@ -117,4 +126,4 @@ const AddCompaignForm: FC<AddCompaignFormProps> = ({ handleCancel, data }) => {
   );
 };
 
-export default AddCompaignForm;
+export default AddUserForm;

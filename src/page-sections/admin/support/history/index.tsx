@@ -1,9 +1,9 @@
-import { Box, Button, Card, Grid, Table, TableBody, TableContainer, TablePagination } from "@mui/material";
+import { Box, Button, Card, Grid, IconButton, Table, TableBody, TableContainer, TablePagination } from "@mui/material";
 // CUSTOM PAGE SECTION COMPONENTS
 import { H6, Paragraph } from "@/components/typography";
 import FromLastMonth from "../FromLastMonth";
 import { FlexBox } from "@/components/flexbox";
-import { DownloadOutlined } from "@mui/icons-material";
+import { Close, DownloadOutlined } from "@mui/icons-material";
 import { useSnackbar } from "@/contexts/snackbarContext";
 import { SyntheticEvent, useState } from "react";
 import useMuiTable, { getComparator, stableSort } from "@/hooks/useMuiTable";
@@ -13,6 +13,8 @@ import SearchArea, { ResolutionStatus, TicketCategory, TicketPriority, TicketSta
 import HeadingArea from "./HeadingArea";
 import UserTableHead from "./UserTableHead";
 import UserTableRow from "./UserTableRow";
+import { Modal } from "@/components/modal";
+import ViewTicketForm from "./ViewHistoryForm";
 
 export interface Ticket {
   id: string;
@@ -96,6 +98,8 @@ const TicketHistory = () => {
   // const [openModal, setOpenModal] = useState(false);
   const [openViewUser, setOpenViewUser] = useState(false);
   const [data, setData] = useState<Ticket>();
+
+  const handleCloseModal = ()=> setOpenViewUser(false)
 
   const {
     page,
@@ -212,6 +216,24 @@ const TicketHistory = () => {
                   {filteredUsers.length === 0 && <TableDataNotFound />}
                 </TableBody>
               </Table>
+              <Modal open={openViewUser} handleClose={handleCloseModal}>
+                <IconButton
+                  aria-label="close"
+                  onClick={() => handleCloseModal()}
+                  sx={(theme) => ({
+                    position: 'absolute',
+                    right: 8,
+                    top: 8,
+                    color: theme.palette.grey[500],
+                  })}
+                >
+                  <Close />
+                </IconButton>
+                <ViewTicketForm
+                  handleClose={handleCloseModal}
+                  data={data}
+                />
+              </Modal>
             </Scrollbar>
           </TableContainer>
 

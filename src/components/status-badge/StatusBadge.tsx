@@ -4,7 +4,7 @@ import { styled } from "@mui/material/styles";
 import { Paragraph } from "../typography";
 import { isDark } from "@/utils/constants";
 
-type Type = "success" | "primary" | "error" | "warning";
+type Type = "success" | "primary" | "error" | "warning" | "pending"| "paid";
 
 // STYLED COMPONENT
 const Status = styled(Paragraph, {
@@ -13,11 +13,11 @@ const Status = styled(Paragraph, {
   borderRadius: 6,
   padding: ".2rem .7rem",
   display: "inline-block",
-  ...(type === "warning" && {
+  ...((type === "warning" || type === "pending") && {
     color: theme.palette.warning[600],
     backgroundColor: theme.palette.warning[50],
   }),
-  ...(type === "success" && {
+  ...((type === "success" || type === "paid") && {
     color: theme.palette.success[600],
     backgroundColor: theme.palette.success[50],
   }),

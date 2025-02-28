@@ -2,6 +2,7 @@ import { SetStateAction, SyntheticEvent, useState } from "react";
 import {
   Box,
   Card,
+  IconButton,
   Modal,
   Table,
   TableBody,
@@ -23,7 +24,8 @@ import { USER_LIST } from "@/__fakeData__/users";
 import { H6, Paragraph } from "@/components/typography";
 import { Roles } from "@/components/auth/RoleBasedGuard";
 import { BigModal } from "@/components/modal";
-import { ViewUser } from "../viewUser";
+import { Close } from "@mui/icons-material";
+import ProfilePageView from "../viewUser";
 
 export type SubscriptionType= "Basic" | "Professional" | "Enterprise"
 
@@ -180,7 +182,20 @@ const UserListPageView = () => {
             handleChangeFilter={handleChangeFilter}
           />
           <BigModal open={openViewUser} handleClose={() => setOpenViewUser(false)}>
-            {/* <ViewUser setOpenModal={setOpenViewUser} data={data}/> */}
+          <IconButton
+                  aria-label="close"
+                  onClick={() => setOpenViewUser(false)}
+                  sx={(theme) => ({
+                    position: 'absolute',
+                    right: 8,
+                    top: 8,
+                    color: theme.palette.grey[500],
+                  })}
+                >
+                  <Close />
+                </IconButton>
+
+            <ProfilePageView data={data} />
           </BigModal>
         </Box>
 

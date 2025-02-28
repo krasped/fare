@@ -12,6 +12,8 @@ import UserTableHead from "../UserTableHead";
 import UserTableRow from "../UserTableRow";
 import { SyntheticEvent, useState } from "react";
 import useMuiTable, { getComparator, stableSort } from "@/hooks/useMuiTable";
+import { useSnackbar } from "@/contexts/snackbarContext";
+import ViewCompaignForm from "../ViewCompaignForm";
 
 export enum Statuses {
   pending = "pending",
@@ -101,12 +103,15 @@ const users = [
 ];
 
 const LeadsPageView = () => {
+  const showSnackbar = useSnackbar();
   const [users, setUsers] = useState([...campaigns]);
   const [compaignFilter, setCompaignFilter] = useState({ status: "", search: "", platform: "", createdBy: "" });
   // const [isEdit, setIsEdit] = useState(false);
   // const [openModal, setOpenModal] = useState(false);
   const [openViewUser, setOpenViewUser] = useState(false);
   const [data, setData] = useState<Campaign>();
+
+  const handleCloseModal = () => setOpenViewUser(false);
 
   const {
     page,
@@ -162,13 +167,18 @@ const LeadsPageView = () => {
   );
 
   const handleDeleteUser = (id: string) => {
+    showSnackbar("Campaign Deleted","The campaign has been successfully deleted.")
     setUsers((state) => state.filter((item) => item.id !== id));
   };
 
-  const handleAllUserDelete = () => {
-    setUsers((state) => state.filter((item) => !selected.includes(item.id)));
-    handleSelectAllRows([])();
+  const handleUpdateUser = (id: string) => {
+    showSnackbar("Campaign Updated",`The campaign "${id}" has been updated.`)
   };
+
+  // const handleAllUserDelete = () => {
+  //   setUsers((state) => state.filter((item) => !selected.includes(item.id)));
+  //   handleSelectAllRows([])();
+  // };
   return (
     <Box pt={2} pb={4}>
       <H6 fontSize={18}>Marketing Campaigns</H6>
@@ -201,7 +211,7 @@ const LeadsPageView = () => {
               handleChangeFilter={handleChangeFilter}
             />
             <BigModal open={openViewUser} handleClose={() => setOpenViewUser(false)}>
-              {/* <ViewUser setOpenModal={setOpenViewUser} data={data}/> */}
+              <ViewCompaignForm handleClose={handleCloseModal} data={data}/>
             </BigModal>
           </Box>
 

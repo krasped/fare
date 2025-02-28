@@ -13,7 +13,7 @@ const Users = Loadable(lazy(() => import("@/pages/admin/users")));
 const Leads = Loadable(lazy(() => import("@/pages/admin/leads")));
 const Analytics = Loadable(lazy(() => import("@/pages/admin/analytics")));
 const Billing = Loadable(lazy(() => import("@/pages/admin/billing")));
-// const Settings = Loadable(lazy(() => import("@/pages/admin/settings")));
+const Settings = Loadable(lazy(() => import("@/pages/admin/settings")));
 const Support = Loadable(lazy(() => import("@/pages/admin/support")));
 
 
@@ -35,7 +35,7 @@ export const AdminRoutes = [
       { path: "leads", element: <Leads /> },
       { path: "analytics",element: <Analytics /> },
       { path: "billing",element: <Billing /> },
-      // { path: "settings",element: <Settings /> },
+      { path: "settings",element: <Settings /> },
       { path: "support",element: <Support /> },
     ],
   },

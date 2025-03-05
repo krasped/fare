@@ -51,10 +51,11 @@ const HeadingArea: FC<HeadingAreaProps> = ({ value, changeTab, isEdit, setIsEdit
 
       <TabContext value={value}>
         <TabListWrapper variant="scrollable" onChange={changeTab}>
-          <Tab disableRipple label="All Users" value="" />
-          <Tab disableRipple label="Basic" value="basic" />
-          <Tab disableRipple label="Professional" value="professional" />
-          <Tab disableRipple label="Enterprise" value="enterprise" />
+          <Tab disableRipple label="All" value="" />
+          <Tab disableRipple label="Free Trial" value="Free Trial" />
+          <Tab disableRipple label="Basic" value="Basic" />
+          <Tab disableRipple label="Standard" value="Standard" />
+          <Tab disableRipple label="Premium" value="Premium" />
         </TabListWrapper>
       </TabContext>
 

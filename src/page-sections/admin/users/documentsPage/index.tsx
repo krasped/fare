@@ -27,7 +27,7 @@ import { BigModal } from "@/components/modal";
 import { Close } from "@mui/icons-material";
 import ProfilePageView from "../viewUser";
 
-export type SubscriptionType= "Basic" | "Professional" | "Enterprise"
+export type SubscriptionType= "Free Trial" | "Basic" | "Standard" | "Premium"
 
 export enum DocumentStatuses {
   approved = "approved",

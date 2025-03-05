@@ -27,7 +27,7 @@ import { BigModal } from "@/components/modal";
 import { Close } from "@mui/icons-material";
 import ProfilePageView from "../viewUser";
 
-export type SubscriptionType= "Basic" | "Professional" | "Enterprise"
+export type SubscriptionType= "Free Trial" | "Basic" | "Standard" | "Premium"
 
 export enum Statuses {
   pending = "Pending",
@@ -66,7 +66,7 @@ const mockUsers: User[] = [
     role: "Agent",
     status: "Active",
     documentsComplete: true,
-    subscriptionType: "Professional",
+    subscriptionType: "Standard",
     subscriptionExpiry: "2024-12-31",
     documentsStatus: {
       complete: true
@@ -137,7 +137,7 @@ const Users = () => {
   const filteredUsers = stableSort(users, getComparator(order, orderBy)).filter(
     (item) => {
       return (
-        (userFilter.subscriptionType ? item.subscriptionType.toLowerCase() === userFilter.subscriptionType : true) &&
+        (userFilter.subscriptionType ? item.subscriptionType === userFilter.subscriptionType : true) &&
         (userFilter.role ? item.role.toLocaleLowerCase() == userFilter.role : true ) && 
         (userFilter.agency ? item.agency.toLocaleLowerCase() == userFilter.agency : true ) && 
         (userFilter.search ?

@@ -25,7 +25,7 @@ export const USER_LIST: any[]  = [
     avatar: "/static/avatar/002-girl.svg",
     //position: "Subscriber",
     phone: "(01) 4563 4556",
-    subscriptionType: "Enterprise",
+    subscriptionType: "Premium",
     status: "Active",
     documentStatus: DocumentStatuses.approved,
 
@@ -40,7 +40,7 @@ export const USER_LIST: any[]  = [
     avatar: "/static/avatar/003-boy.svg",
     //position: "Subscriber",
     phone: "(01) 4563 4556",
-    subscriptionType: "Professional",
+    subscriptionType: "Standard",
     status: "Active",
     documentStatus: DocumentStatuses.approved,
 

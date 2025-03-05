@@ -29,7 +29,7 @@ const headCells = [
   // { id: "company", numeric: true, disablePadding: false, label: "Company" },
   { id: "role", numeric: true, disablePadding: false, label: "Role" },
   { id: "agency", numeric: true, disablePadding: false, label: "Agency" },
-  { id: "subscriptionType", numeric: true, disablePadding: false, label: "Type" },
+  { id: "subscriptionType", numeric: true, disablePadding: false, label: "Plan" },
   { id: "status", numeric: true, disablePadding: false, label: "Status" },
   { id: "documentStatus", numeric: true, disablePadding: false, label: "Document Status" },
   { id: "actions", numeric: true, disablePadding: false, label: "Actions" },

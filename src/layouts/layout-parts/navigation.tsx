@@ -340,5 +340,5 @@ const navigationsExample: Navigations[] = [
 export const navigations: Navigations[] = [
   ...adminNavigations,
   // ...agentNavigations1,
-  ...navigationsExample
+  // ...navigationsExample
 ]

@@ -23,8 +23,9 @@ import MapMarkerIcon from "@/icons/MapMarkerIcon";
 // CUSTOM UTILS METHOD
 import { format } from "@/utils/currency";
 import { AvatarLoading } from "@/components/avatar-loading";
-import { Statuses, User } from "../page-view";
+import { Statuses, User } from "../usersPage";
 import { StatusBadge } from "@/components/status-badge";
+import { DocumentStatuses } from "../documentsPage";
 
 // const agentProfile = {
 //   name: "John Smith",
@@ -76,13 +77,14 @@ const StyledTabList = styled(TabList)(({ theme }) => ({
 
 // =======================================================================
 type LayoutProps = {
-  data?: User|undefined;
+  data?: User |undefined;
   children: ReactNode;
+  onlyDocuments?: boolean;
   handleTabList: (_: SyntheticEvent, value: string) => void;
 };
 // =======================================================================
 
-const Layout: FC<LayoutProps> = ({ children, handleTabList, data }) => {
+const Layout: FC<LayoutProps> = ({ children, handleTabList, data, onlyDocuments }) => {
   return (
     <Fragment>
         {/* < Box sx={{ mb: 2 }}>
@@ -107,27 +109,27 @@ const Layout: FC<LayoutProps> = ({ children, handleTabList, data }) => {
 
           <Box>
             <H6 fontSize={18} textAlign="center">
-              {data?.name}
+              {data?.agentName}
             </H6>
             <Typography mt={2} textAlign="center" variant="body1" color="text.secondary">
               {data?.email}
             </Typography>
-            <FlexBox mt={1} justifyContent={"center"}>
+            {!onlyDocuments && <FlexBox mt={1} justifyContent={"center"}>
               <StatusBadge type={data?.status === Statuses.active ? "success" : (data?.status === Statuses.pending ? "warning" : "error")}>
                 {data?.status}
               </StatusBadge>
-            </FlexBox>
+            </FlexBox>}
           </Box>
 
           
         </ContentWrapper>
 
         <StyledTabList variant="scrollable" onChange={handleTabList}>
-          <Tab disableRipple label="General Info" value="1" />
-          <Tab disableRipple label="Approval Workflow" value="2" />
+          {!onlyDocuments && <Tab disableRipple label="General Info" value="1" />}
+          {!onlyDocuments && <Tab disableRipple label="Approval Workflow" value="2" />}
           <Tab disableRipple label="Documents" value="3" />
-          <Tab disableRipple label="Subscription" value="4" />
-          <Tab disableRipple label="Activity Log" value="5" />
+          {!onlyDocuments && <Tab disableRipple label="Subscription" value="4" />}
+          {!onlyDocuments && <Tab disableRipple label="Activity Log" value="5" />}
         </StyledTabList>
 
       {children || <Outlet />}

@@ -1,4 +1,4 @@
-import { User } from "@/page-sections/admin/users/page-view";
+import { DocumentStatuses } from "@/page-sections/admin/users/documentsPage";
 
 export const USER_LIST: any[]  = [
   {
@@ -13,6 +13,7 @@ export const USER_LIST: any[]  = [
     phone: "(01) 4563 4556",
     subscriptionType: "Basic",
     status: "Active",
+    documentStatus: DocumentStatuses.approved,
   },
   {
     id: "CEqmLNf9WjMv0C75NcFgf",
@@ -26,6 +27,8 @@ export const USER_LIST: any[]  = [
     phone: "(01) 4563 4556",
     subscriptionType: "Enterprise",
     status: "Active",
+    documentStatus: DocumentStatuses.approved,
+
   },
   {
     id: "WiiFzcbNyV507aeUu2rBp",
@@ -39,6 +42,8 @@ export const USER_LIST: any[]  = [
     phone: "(01) 4563 4556",
     subscriptionType: "Professional",
     status: "Active",
+    documentStatus: DocumentStatuses.approved,
+
   },
   {
     id: "kblkUheZKBwyYXhpyXZRU",
@@ -52,6 +57,8 @@ export const USER_LIST: any[]  = [
     phone: "(01) 4563 4556",
     subscriptionType: "Basic",
     status: "Active",
+    documentStatus: DocumentStatuses.approved,
+
   },
   {
     id: "hJdMmi-XW-bOZXOiIuW06",
@@ -65,6 +72,8 @@ export const USER_LIST: any[]  = [
     phone: "(01) 4563 4556",
     subscriptionType: "Basic",
     status: "Active",
+    documentStatus: DocumentStatuses.waiting,
+
   },
   {
     id: "66CoRSh1eQDkN0oAygxSD",

@@ -85,21 +85,21 @@ const Subscriptions = () => {
     if(isConfirm) {showSnackbar("Subscription Cancelled", "Your subscription has been cancelled and will not renew automatically.", "error");}
   }
   
-  return (
-    <Box sx={{ height: "100%" }}>
-        <Stack p={3} spacing={3}>
-        <SinglePost
-          category="Current Plan"
-          subTitle="You are currently on the Professional Plan, which renews automatically every month unless canceled."
-          title="Professional"
-        />
+    return (
+      <Box sx={{ height: "100%" }}>
+          <Stack p={3} spacing={3}>
+          <SinglePost
+            category="Current Plan"
+            subTitle="You are currently on the Professional Plan, which renews automatically every month unless canceled."
+            title="Professional"
+          />
 
-        <SinglePost
-          category="2024-12-31"
-          title="Expiry Date"
-        />
+          <SinglePost
+            category="2024-12-31"
+            title="Expiry Date"
+          />
 
-        <Paragraph color="grey.500">Next billing date: December 31, 2024</Paragraph>
+          <Paragraph color="grey.500">Next billing date: December 31, 2024</Paragraph>
       </Stack>
 
       <FlexBox pr={3} pl={3} gap={2}>

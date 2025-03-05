@@ -7,10 +7,11 @@ import ErrorView from "@/page-sections/permission/ErrorView";
 
 export enum Roles {
   admin = "admin",
-  agent = "agent",
   subAgent = "subAgent",
   manager = "manager",
   marketing = "marketing",
+  agentOwner = "agentOwner",
+  agent = "agentOwner",
 }
 
 // ==============================================================

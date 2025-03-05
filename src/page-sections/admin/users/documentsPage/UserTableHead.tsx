@@ -24,13 +24,17 @@ interface UserTableHeadProps {
 // ==============================================================
 
 const headCells = [
-  { id: "name", numeric: true, disablePadding: false, label: "Name" },
-  { id: "email", numeric: false, disablePadding: false, label: "Email" },
-  // { id: "company", numeric: true, disablePadding: false, label: "Company" },
-  { id: "role", numeric: true, disablePadding: false, label: "Role" },
-  { id: "agency", numeric: true, disablePadding: false, label: "Agency" },
-  { id: "subscriptionType", numeric: true, disablePadding: false, label: "Type" },
+  { id: "agentName", numeric: true, disablePadding: false, label: "Agent Name" },
+  { id: "agencyName", numeric: true, disablePadding: false, label: "Agency Name" },
+  { id: "documentProvided", numeric: true, disablePadding: false, label: "Doc Provided" },
   { id: "status", numeric: true, disablePadding: false, label: "Status" },
+
+  // { id: "email", numeric: false, disablePadding: false, label: "Email" },
+  // // { id: "company", numeric: true, disablePadding: false, label: "Company" },
+  // { id: "role", numeric: true, disablePadding: false, label: "Role" },
+  // { id: "agency", numeric: true, disablePadding: false, label: "Agency" },
+  // { id: "subscriptionType", numeric: true, disablePadding: false, label: "Type" },
+  // { id: "status", numeric: true, disablePadding: false, label: "Status" },
   { id: "actions", numeric: true, disablePadding: false, label: "Actions" },
 ];
 

@@ -7,8 +7,9 @@ import useNavigate from "@/hooks/useNavigate";
 import { FlexBox } from "@/components/flexbox";
 import { Paragraph } from "@/components/typography";
 import { TableMoreMenuItem, TableMoreMenu } from "@/components/table";
-import { Statuses, User } from "./page-view";
+import { Statuses, User } from ".";
 import { StatusBadge } from "@/components/status-badge";
+import { DocumentStatuses } from "../documentsPage";
 
 // ==============================================================
 interface UserRowProps {
@@ -76,6 +77,11 @@ const UserTableRow = (props: UserRowProps) => {
         <StatusBadge type={user.status === Statuses.active ? "success" : (user.status === Statuses.pending ? "warning" : "error")}>
           {user.status}
         </StatusBadge>
+      </TableCell>
+      <TableCell padding="normal">
+              <StatusBadge type={user.documentStatus === DocumentStatuses.approved ? "success" : ((user.documentStatus === DocumentStatuses.waiting || user.documentStatus === DocumentStatuses.missing) ? "warning" : "error")}>
+                {user.documentStatus}
+              </StatusBadge>
       </TableCell>
 
       <TableCell padding="normal">

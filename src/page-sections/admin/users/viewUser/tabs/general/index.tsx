@@ -20,7 +20,7 @@ import { H5 } from "@/components/typography";
 import { Scrollbar } from "@/components/scrollbar";
 import { AvatarBadge } from "@/components/avatar-badge";
 import { Roles } from "@/components/auth/RoleBasedGuard";
-import { Statuses } from "../../../page-view";
+import { Statuses } from "../../../usersPage";
 
 // ==========================================================================
 type AddUserFormProps = { data?: any };
@@ -31,7 +31,6 @@ const GeneralInfo: FC<AddUserFormProps> = ({data}) => {
 
   const ALL_ROLES = [
       { id: 1, name: "Admin", value: Roles.admin },
-      { id: 2, name: "Agent", value: Roles.agent },
       { id: 3, name: "sub Agent", value: Roles.subAgent },
       { id: 4, name: "Manager", value: Roles.manager },
       { id: 5, name: "Marketing", value: Roles.marketing },

@@ -10,7 +10,7 @@ import { FlexBetween, FlexBox } from "@/components/flexbox";
 // CUSTOM ICON COMPONENTS
 import GroupSenior from "@/icons/GroupSenior";
 import Add from "@/icons/Add";
-import AddUserForm from "./AddUserForm";
+import AddUserForm from "../AddUserForm";
 import { Modal } from "@/components/modal";
 
 // STYLED COMPONENT
@@ -45,31 +45,31 @@ const HeadingArea: FC<HeadingAreaProps> = ({ value, changeTab, isEdit, setIsEdit
           <GroupSenior sx={{ color: "primary.main" }} />
         </IconWrapper>
 
-        <Paragraph fontSize={16}>User Management</Paragraph>
+        <Paragraph fontSize={16}>User's Documents</Paragraph>
       </FlexBox>
 
-      <TabContext value={value}>
+      {/* <TabContext value={value}>
         <TabListWrapper variant="scrollable" onChange={changeTab}>
           <Tab disableRipple label="All Users" value="" />
           <Tab disableRipple label="Basic" value="basic" />
           <Tab disableRipple label="Professional" value="professional" />
           <Tab disableRipple label="Enterprise" value="enterprise" />
         </TabListWrapper>
-      </TabContext>
-
+      </TabContext> */}
+{/* 
       <Button
         variant="contained"
         startIcon={<Add />}
         onClick={() => {setIsEdit(false); setOpenModal(true)}}
       >
         Add New User
-      </Button>
-      <Modal open={openModal} handleClose={handleCloseModal}>
+      </Button> */}
+      {/* <Modal open={openModal} handleClose={handleCloseModal}>
         <AddUserForm
           handleCancel={handleCloseModal}
           data={isEdit ? data : null}
         />
-      </Modal>
+      </Modal> */}
     </FlexBetween>
   );
 };

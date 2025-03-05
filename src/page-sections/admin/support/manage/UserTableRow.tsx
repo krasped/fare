@@ -10,7 +10,7 @@ import { TableMoreMenuItem, TableMoreMenu } from "@/components/table";
 import { ConfirmationDialog } from "@/components/dialogs";
 import { StatusBadge } from "@/components/status-badge";
 import { Ticket } from ".";
-import { Statuses } from "../page-view";
+import { Priority } from "../page-view";
 
 // ==============================================================
 interface UserRowProps {
@@ -88,7 +88,7 @@ const UserTableRow = (props: UserRowProps) => {
 
 
       <TableCell padding="normal">
-        <StatusBadge type={user.priority === Statuses.high ? "error" : (user.priority === Statuses.medium ? "warning" : "primary")}>
+        <StatusBadge type={user.priority === Priority.high ? "error" : (user.priority === Priority.medium ? "warning" : "primary")}>
           {user.priority}
         </StatusBadge>
       </TableCell>

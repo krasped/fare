@@ -7,10 +7,20 @@ import Layout from "../Layout";
 import ManageTickets from "../manage";
 import TicketHistory from "../history";
 
-export enum Statuses {
+export enum Priority {
   high = "high",
   medium = "medium",
   low = "low",
+}
+
+export enum Statuses {
+  new = "new ticket",
+  open = "Open",
+  pending = "Pending",
+  escalated = "Escalated",
+  resolvedSuccess = "Resolved successfully",
+  resolvedUnSuccess = "Resolved -  Un-successfully",
+  close = "Close",
 }
 
 const SupportPageView = () => {

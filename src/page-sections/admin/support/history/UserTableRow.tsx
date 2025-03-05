@@ -10,7 +10,7 @@ import { TableMoreMenuItem, TableMoreMenu } from "@/components/table";
 import { ConfirmationDialog } from "@/components/dialogs";
 import { StatusBadge } from "@/components/status-badge";
 import { Ticket } from ".";
-import { Statuses } from "../page-view";
+import { Priority } from "../page-view";
 
 // ==============================================================
 interface UserRowProps {

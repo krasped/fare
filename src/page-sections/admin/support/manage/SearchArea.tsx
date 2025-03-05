@@ -93,18 +93,31 @@ const SearchArea = (props: SearchAreaProps) => {
       <TextField
         select
         fullWidth
-        label="Select filter type"
-        value={currentFilter}
-        onChange={(e) => handleSetCurrentFilter(e.target.value as CurrentFilter)}
+        label="Status"
+        value={filter.status}
+        onChange={(e) => handleChangeFilter("status", e.target.value)}
       >
-        {ALL_Filters.map(({ id, name, value }) => (
+        {filters.status.map(({ id, name, value }) => (
+          <MenuItem key={id} value={value}>
+            {name}
+          </MenuItem>
+        ))}
+      </TextField>
+      <TextField
+        select
+        fullWidth
+        label="Priority"
+        value={filter.priority}
+        onChange={(e) => handleChangeFilter("priority", e.target.value)}
+      >
+        {filters.priority.map(({ id, name, value }) => (
           <MenuItem key={id} value={value}>
             {name}
           </MenuItem>
         ))}
       </TextField>
 
-      {currentFilter && <TextField
+      {/* {currentFilter && <TextField
         select
         fullWidth
         label={"Select " + currentFilter}
@@ -116,7 +129,7 @@ const SearchArea = (props: SearchAreaProps) => {
             {name}
           </MenuItem>
         ))}
-      </TextField>}
+      </TextField>} */}
 
       {/* NAVIGATION BUTTONS */}
       {/* <Box flexShrink={0} className="actions">

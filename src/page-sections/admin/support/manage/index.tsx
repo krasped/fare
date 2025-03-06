@@ -24,10 +24,12 @@ export interface Ticket {
     name: string;
     email: string;
   };
+  phone?: string;
   subject: string;
   priority: TicketPriority;
   status: TicketStatus;
   lastUpdated: string;
+  agency?: string;
   assignedTo?: string;
   description?: string;
   attachments?: string[];

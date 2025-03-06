@@ -1,6 +1,6 @@
 import { MouseEvent, useState } from "react";
-import { Avatar, Checkbox, Chip, TableCell, TableRow } from "@mui/material";
-import { DeleteOutline, PageviewOutlined, Edit } from "@mui/icons-material";
+import { Avatar, Button, Checkbox, Chip, TableCell, TableRow } from "@mui/material";
+import { DeleteOutline, PageviewOutlined, Edit, EditNoteOutlined } from "@mui/icons-material";
 // CUSTOM DEFINED HOOK
 import useNavigate from "@/hooks/useNavigate";
 // CUSTOM COMPONENTS
@@ -10,7 +10,7 @@ import { TableMoreMenuItem, TableMoreMenu } from "@/components/table";
 import { ConfirmationDialog } from "@/components/dialogs";
 import { StatusBadge } from "@/components/status-badge";
 import { Ticket } from ".";
-import { Priority } from "../page-view";
+import { Priority, Statuses } from "../page-view";
 
 // ==============================================================
 interface UserRowProps {
@@ -59,9 +59,9 @@ const UserTableRow = (props: UserRowProps) => {
         <Paragraph
               fontWeight={500}
               color="text.primary"
-              sx={{
-                ":hover": { textDecoration: "underline", cursor: "pointer" },
-              }}
+              // sx={{
+              //   ":hover": { textDecoration: "underline", cursor: "pointer" },
+              // }}
             >
               {user.id}
         </Paragraph></TableCell>
@@ -84,30 +84,37 @@ const UserTableRow = (props: UserRowProps) => {
           </div>
         </FlexBox></TableCell>
 
+      <TableCell padding="normal">{user.agency}</TableCell>
+      <TableCell padding="normal">{user.category}</TableCell>
       <TableCell padding="normal">{user.subject}</TableCell>
-
+      <TableCell padding="normal">{user.status}</TableCell>
 
       <TableCell padding="normal">
-        <StatusBadge type={user.priority === Priority.high ? "error" : (user.priority === Priority.medium ? "warning" : "primary")}>
+        <StatusBadge type={user.priority === Priority.high ? "error" : (user.priority === Priority.high ? "warning" : "primary")}>
           {user.priority}
         </StatusBadge>
       </TableCell>
 
 
       <TableCell padding="normal">
-        <TableMoreMenu
+        {/* <TableMoreMenu
           open={openMenuEl}
           handleOpen={handleOpenMenu}
           handleClose={handleCloseOpenMenu}
-        >
-          <TableMoreMenuItem
-            Icon={PageviewOutlined}
-            title="View Details"
+        > */}
+        <Button variant="text" onClick={() => handleViewProfileDetailsUser(user)}>
+          <FlexBox gap={1}>
+            <EditNoteOutlined/>Edit
+          </FlexBox>
+        </Button>
+          {/* <TableMoreMenuItem
+            Icon={EditNoteOutlined}
+            title="Edit"
             handleClick={() => {
               handleCloseOpenMenu();
               handleViewProfileDetailsUser(user);
             }}
-          />
+          /> */}
           {/* <TableMoreMenuItem
             Icon={Edit}
             title="Edit"
@@ -124,7 +131,7 @@ const UserTableRow = (props: UserRowProps) => {
               setIsOpen(true)
             }}
           /> */}
-        </TableMoreMenu>
+        {/* </TableMoreMenu> */}
       </TableCell>
           <ConfirmationDialog title={"Delete Campaign"} 
             description={"Are you sure you want to delete this campaign? This action cannot be undone."} 

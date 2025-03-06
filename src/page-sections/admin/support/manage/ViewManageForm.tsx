@@ -108,6 +108,7 @@ const ViewManageForm: FC<RefundFormProps> = ({ handleClose, data }) => {
     reply: "",
     category: data?.category || "",
     subject: data?.subject || "",
+    phone: data?.phone || "",
     files: [],
     isNeedEscalation: false,
   };
@@ -231,7 +232,19 @@ const ViewManageForm: FC<RefundFormProps> = ({ handleClose, data }) => {
                 ))}
               </TextField>
             </Grid> */}
-
+            <Grid item sm={6} xs={12}>
+              <TextField
+                fullWidth
+                name="phone"
+                label="Phone Number"
+                variant="outlined"
+                onBlur={handleBlur}
+                value={values.phone}
+                onChange={handleChange}
+                error={Boolean(errors.phone && touched.phone)}
+                helperText={(touched.phone && errors.phone) as string}
+              />
+            </Grid>
             <Grid item sm={12} xs={12}>
               <Stack spacing={2}>
                 <ListItem

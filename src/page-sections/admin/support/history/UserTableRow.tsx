@@ -1,6 +1,6 @@
 import { MouseEvent, useState } from "react";
-import { Avatar, Checkbox, Chip, TableCell, TableRow } from "@mui/material";
-import { DeleteOutline, PageviewOutlined, Edit } from "@mui/icons-material";
+import { Avatar, Button, Checkbox, Chip, TableCell, TableRow } from "@mui/material";
+import { DeleteOutline, PageviewOutlined, Edit, EditNoteOutlined } from "@mui/icons-material";
 // CUSTOM DEFINED HOOK
 import useNavigate from "@/hooks/useNavigate";
 // CUSTOM COMPONENTS
@@ -61,14 +61,21 @@ const UserTableRow = (props: UserRowProps) => {
                 ":hover": { textDecoration: "underline", cursor: "pointer" },
               }}
             >
-              {user.id}
+              {user.tiketId}
         </Paragraph></TableCell>
 
       {/* <TableCell padding="normal">{user.email}</TableCell> */}
 
+      <TableCell padding="normal">{user.agentName}</TableCell>
+      <TableCell padding="normal">{user.agency}</TableCell>
       <TableCell padding="normal">{user.category}</TableCell>
+      <TableCell padding="normal">{user.subject}</TableCell>
+      <TableCell padding="normal">{user.status}</TableCell>
+      <TableCell padding="normal">{user.resolvedBy}</TableCell>
+      <TableCell padding="normal">{user.dateCreated}</TableCell>
+      <TableCell padding="normal">{user.dateResolved}</TableCell>
 
-      <TableCell padding="normal"> <FlexBox alignItems="center" gap={2}>
+      {/* <TableCell padding="normal"> <FlexBox alignItems="center" gap={2}>
           <div>
             <Paragraph
               fontWeight={500}
@@ -82,30 +89,27 @@ const UserTableRow = (props: UserRowProps) => {
 
             <Paragraph fontSize={13}>{user?.submittedBy?.email}</Paragraph>
           </div>
-        </FlexBox></TableCell>
-
-      <TableCell padding="normal">{user.resolvedBy}</TableCell>
-
-      <TableCell padding="normal">{user.createdAt}</TableCell>
-
-      <TableCell padding="normal">{user.closedAt}</TableCell>
-
-      <TableCell padding="normal">{user.resolutionStatus}</TableCell>
+        </FlexBox></TableCell> */}
 
       <TableCell padding="normal">
-        <TableMoreMenu
+        {/* <TableMoreMenu
           open={openMenuEl}
           handleOpen={handleOpenMenu}
           handleClose={handleCloseOpenMenu}
-        >
-          <TableMoreMenuItem
+        > */}
+          {/* <TableMoreMenuItem
             Icon={PageviewOutlined}
-            title="View Details"
+            title="Edit"
             handleClick={() => {
               handleCloseOpenMenu();
               handleViewProfileDetailsUser(user);
             }}
-          />
+          /> */}
+          <Button variant="text" onClick={() => handleViewProfileDetailsUser(user)}>
+                    <FlexBox gap={1}>
+                      <EditNoteOutlined/>Edit
+                    </FlexBox>
+                  </Button>
           {/* <TableMoreMenuItem
             Icon={Edit}
             title="Edit"
@@ -122,7 +126,7 @@ const UserTableRow = (props: UserRowProps) => {
               setIsOpen(true)
             }}
           /> */}
-        </TableMoreMenu>
+        {/* </TableMoreMenu> */}
       </TableCell>
           <ConfirmationDialog title={"Delete Campaign"} 
             description={"Are you sure you want to delete this campaign? This action cannot be undone."} 

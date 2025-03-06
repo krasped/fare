@@ -24,8 +24,11 @@ const SearchArea = (props: SearchAreaProps) => {
   const ALL_ROLES = [
     { id: 1, name: "All Roles", value: "" },
     { id: 2, name: "Admin", value: Roles.admin },
-    { id: 3, name: "Agent", value: Roles.agent },
+    // { id: 3, name: "Agent Owner", value: Roles.agent },
+    { id: 3, name: "Sub Agent", value: Roles.subAgent },
     { id: 4, name: "Manager", value: Roles.manager },
+    { id: 5, name: "Agent Owner", value: Roles.agentOwner },
+    { id: 6, name: "Marketing", value: Roles.marketing },
   ];
   const ALL_AGENCIES = [
     { id: 1, name: "All Agencies", value: "" },

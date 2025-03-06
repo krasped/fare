@@ -10,6 +10,7 @@ import { FlexBetween } from "@/components/flexbox";
 import Apps from "@/icons/Apps";
 import FormatBullets from "@/icons/FormatBullets";
 import { Roles } from "@/components/auth/RoleBasedGuard";
+import { DocumentStatuses } from ".";
 
 // ==========================================================================================
 type SearchAreaProps = {
@@ -22,15 +23,16 @@ type SearchAreaProps = {
 
 const SearchArea = (props: SearchAreaProps) => {
   const ALL_STATUSES = [
-    { id: 1, name: "Waiting for approval", value: "Waiting" },
-    { id: 2, name: "Approved", value: "Approved" },
-    { id: 3, name: "decline", value: "decline" },
+    { id: 1, name: DocumentStatuses.approved, value: DocumentStatuses.approved },
+    { id: 2, name: DocumentStatuses.notApproved, value: DocumentStatuses.notApproved },
+    { id: 3, name: DocumentStatuses.waiting, value: DocumentStatuses.waiting },
+    { id: 4, name: DocumentStatuses.missing, value: DocumentStatuses.missing },
   ];
-  const ALL_AGENCIES = [
-    { id: 1, name: "All Agencies", value: "" },
-    { id: 2, name: "Top Reality", value: "top reality" },
-    { id: 3, name: "Best Homes", value: "best homes" },
-  ];
+  // const ALL_AGENCIES = [
+  //   { id: 1, name: "All Agencies", value: "" },
+  //   { id: 2, name: "Top Reality", value: "top reality" },
+  //   { id: 3, name: "Best Homes", value: "best homes" },
+  // ];
   const { handleChangeFilter, filter } = props;
 
   const navigate = useNavigate();

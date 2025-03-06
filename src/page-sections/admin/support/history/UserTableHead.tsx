@@ -24,13 +24,15 @@ interface UserTableHeadProps {
 // ==============================================================
 
 const headCells = [
-  { id: "id", numeric: true, disablePadding: false, label: "Ticket ID" },
-  { id: "category", numeric: true, disablePadding: false, label: "Created By" },
-  { id: "submittedBy", numeric: true, disablePadding: false, label: "Submitted By" },
-  { id: "resolvedBy", numeric: true, disablePadding: false, label: "Resolved By" },
-  { id: "createdAt", numeric: true, disablePadding: false, label: "Date Created" },
-  { id: "closedAt", numeric: true, disablePadding: false, label: "Date Resolved" },
-  { id: "resolutionStatus", numeric: true, disablePadding: false, label: "Resolution Status" },
+  { id: "tiketId", numeric: true, disablePadding: false, label: "Ticket ID" },
+  { id: "agentName", numeric: true, disablePadding: false, label: "Agent Name" },
+  { id: "agency", numeric: true, disablePadding: false, label: "Agency" },
+  { id: "category", numeric: true, disablePadding: false, label: "Category" },
+  { id: "subject", numeric: true, disablePadding: false, label: "Subject" },
+  { id: "status", numeric: true, disablePadding: false, label: "Status" },
+  { id: "resolvedBy", numeric: true, disablePadding: false, label: "Resolved by" },
+  { id: "dateCreated", numeric: true, disablePadding: false, label: "Date created" },
+  { id: "dateResolved", numeric: true, disablePadding: false, label: "Date resolved" },
   { id: "actions", numeric: true, disablePadding: false, label: "Actions" },
 ];
 

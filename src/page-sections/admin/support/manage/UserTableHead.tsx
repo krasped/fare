@@ -26,10 +26,13 @@ interface UserTableHeadProps {
 const headCells = [
   { id: "id", numeric: true, disablePadding: false, label: "Ticket ID" },
   { id: "createdAt", numeric: true, disablePadding: false, label: "Created At" },
-  { id: "submittedBy", numeric: true, disablePadding: false, label: "Submitted By" },
+  { id: "agentName", numeric: true, disablePadding: false, label: "Agent Name" },
+  { id: "agency", numeric: true, disablePadding: false, label: "Agency" },
+  { id: "category", numeric: true, disablePadding: false, label: "Category" },
   { id: "subject", numeric: true, disablePadding: false, label: "Subject" },
+  { id: "status", numeric: true, disablePadding: false, label: "Status" },
   { id: "priority", numeric: true, disablePadding: false, label: "Priority" },
-  { id: "actions", numeric: true, disablePadding: false, label: "Actions" },
+  { id: "actions", numeric: false, disablePadding: false, label: "Actions" },
 ];
 
 const UserTableHead = (props: UserTableHeadProps) => {

@@ -39,16 +39,20 @@ const SearchArea = (props: SearchAreaProps) => {
   const filters = {
     status: [
       { id: 1, name: "All", value: "" },
-      { id: 2, name: "Open", value: "open" },
-      { id: 3, name: "In Progress", value: "inprogress" },
-      { id: 4, name: "Resolved", value: "resolved" },
-      { id: 5, name: "Rejected", value: "rejected" },
+      { id: 2, name: "New Ticket", value: "new_ticket" },
+      { id: 3, name: "Open", value: "open" },
+      { id: 4, name: "Pending", value: "pending" },
+      { id: 5, name: "Escalated", value: "escalated" },
+      { id: 6, name: "Resolved successfully", value: "resolved_successfully" },
+      { id: 7, name: "Resolved-Un-successfully", value: "resolved-un-successfully" },
+      { id: 8, name: "Close", value: "close" },
     ],
     priority: [
       { id: 1, name: "All", value: "" },
-      { id: 2, name: "High", value: "high" },
+      { id: 2, name: "Low", value: "low" },
       { id: 3, name: "Medium", value: "medium" },
-      { id: 4, name: "Low", value: "low" },
+      { id: 4, name: "High", value: "high" },
+      { id: 5, name: "Critical", value: "critical" },
     ],
   }
   

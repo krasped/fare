@@ -10,6 +10,7 @@ import TicketHistory from "../history";
 export enum Priority {
   high = "high",
   medium = "medium",
+  critical = "critical",
   low = "low",
 }
 

@@ -20,7 +20,7 @@ import DateRange from "@/icons/DateRange";
 import Bratislava from "@/icons/Bratislava";
 import MapMarkerIcon from "@/icons/MapMarkerIcon";
 // CUSTOM COMPONENTS
-import { AvatarBadge } from "@/components/avatar-badge";
+// import { AvatarBadge } from "@/components/avatar-badge";
 import { AvatarLoading } from "@/components/avatar-loading";
 import { FlexBetween, FlexBox } from "@/components/flexbox";
 import { H6, Paragraph, Small } from "@/components/typography";

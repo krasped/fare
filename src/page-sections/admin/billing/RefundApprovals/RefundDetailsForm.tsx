@@ -18,7 +18,7 @@ import * as Yup from "yup";
 // CUSTOM COMPONENTS
 import { H5, Paragraph, Span } from "@/components/typography";
 import { Scrollbar } from "@/components/scrollbar";
-import { AvatarBadge } from "@/components/avatar-badge";
+// import { AvatarBadge } from "@/components/avatar-badge";
 import { Roles } from "@/components/auth/RoleBasedGuard";
 import { Refund } from ".";
 import { useSnackbar } from "@/contexts/snackbarContext";

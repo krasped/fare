@@ -1,7 +1,7 @@
 import { FC, forwardRef } from "react";
 import Box, { BoxProps } from "@mui/material/Box";
 
-const FlexRowAlign: FC<BoxProps> = forwardRef(({ children, ...props }, ref) => (
+const FlexRowAlign = forwardRef<HTMLDivElement, BoxProps>(({ children, ...props }, ref) => (
   <Box
     display="flex"
     alignItems="center"

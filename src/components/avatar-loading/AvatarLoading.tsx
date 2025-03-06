@@ -10,7 +10,7 @@ interface Props extends AvatarProps {
 }
 // ==============================================================
 
-const AvatarLoading: FC<Props> = forwardRef((props, ref) => {
+const AvatarLoading = forwardRef<HTMLDivElement, Props>((props, ref) => {
   const {
     percentage,
     alt = "user",

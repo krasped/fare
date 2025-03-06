@@ -26,7 +26,7 @@ interface Props extends BadgeProps {
 }
 // ===================================================================
 
-const AvatarBadge: FC<Props> = forwardRef((props, ref) => {
+  const AvatarBadge = forwardRef<HTMLDivElement, Props>((props, ref) => {
   const { children, width = 25, height = 25, ...others } = props;
 
   return (

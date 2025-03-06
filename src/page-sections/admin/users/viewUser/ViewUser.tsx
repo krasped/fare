@@ -13,7 +13,7 @@ import {
 import CameraAlt from "@mui/icons-material/CameraAlt";
 import TabList from "@mui/lab/TabList";
 // CUSTOM COMPONENTS
-import { AvatarBadge } from "@/components/avatar-badge";
+// import { AvatarBadge } from "@/components/avatar-badge";
 import { H5, H6, Paragraph } from "@/components/typography";
 import { FlexBetween, FlexBox } from "@/components/flexbox";
 // ICON COMPONENTS

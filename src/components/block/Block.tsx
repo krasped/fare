@@ -12,7 +12,7 @@ interface Props extends PropsWithChildren, CardProps {
 }
 // ==============================================================
 
-const Block: FC<Props> = forwardRef(
+const Block = forwardRef<HTMLDivElement, Props>(
   ({ title, children, bgTransparent = false, ...props }, ref) => (
     <StyledCard ref={ref} bg={bgTransparent ? 1 : 0} {...props}>
       <Paragraph mb={3} fontSize={18} fontWeight={600}>

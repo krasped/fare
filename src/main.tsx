@@ -11,15 +11,20 @@ import "nprogress/nprogress.css";
 import "react-quill/dist/quill.snow.css";
 import "simplebar-react/dist/simplebar.min.css";
 import "pure-react-carousel/dist/react-carousel.es.css";
+import { Provider } from 'react-redux';
+import store from './redux/store';
 
 const rootElement = document.getElementById("root") as HTMLElement;
 const root = ReactDOM.createRoot(rootElement);
 
 root.render(
   <React.StrictMode>
-    <SettingsProvider>
-      <App />
-    </SettingsProvider>
+    <Provider store={store}>
+      <SettingsProvider>
+        <App />
+      </SettingsProvider>
+    </Provider>
+    
   </React.StrictMode>,
 );
 

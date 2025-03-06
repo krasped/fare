@@ -12,7 +12,7 @@ const Wrapper = styled(FlexRowAlign)(({ theme }) => ({
   backgroundColor: theme.palette.primary[100],
 }));
 
-const IconWrapper: FC<BoxProps> = forwardRef(({ children, ...props }, ref) => (
+const IconWrapper = forwardRef<HTMLDivElement, BoxProps>(({ children, ...props }, ref) => (
   <Wrapper ref={ref} {...props}>
     {children}
   </Wrapper>

@@ -1,7 +1,7 @@
 import { FC, forwardRef } from "react";
 import Box, { BoxProps } from "@mui/material/Box";
 
-const FlexBetween: FC<BoxProps> = forwardRef(({ children, ...props }, ref) => (
+const FlexBetween = forwardRef<HTMLDivElement, BoxProps>(({ children, ...props }, ref) => (
   <Box
     display="flex"
     alignItems="center"

@@ -18,7 +18,6 @@ import * as Yup from "yup";
 // CUSTOM COMPONENTS
 import { H5 } from "@/components/typography";
 import { Scrollbar } from "@/components/scrollbar";
-import { AvatarBadge } from "@/components/avatar-badge";
 import { Roles } from "@/components/auth/RoleBasedGuard";
 import { Statuses } from "../../../usersPage";
 

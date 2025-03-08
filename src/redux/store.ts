@@ -1,5 +1,5 @@
-import { Action, configureStore, Middleware } from '@reduxjs/toolkit';
-import { usersReducer } from './usersSlice';
+import { configureStore } from '@reduxjs/toolkit';
+import { usersReducer, billingReducer , dashboardReducer, leadsReducer, settingReducer, supportReducer, analyticsReducer  } from "./admin";
 import { useDispatch } from 'react-redux';
 // import logger from 'redux-logger';
 // import additionalMiddleware from 'additional-middleware'
@@ -8,6 +8,12 @@ export type RootState = ReturnType<typeof store.getState>
 const store = configureStore({
   reducer: {
     users: usersReducer,
+    billing: billingReducer,
+    dashboard: dashboardReducer,
+    leads: leadsReducer,
+    setting: settingReducer,
+    support: supportReducer,
+    analytics: analyticsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()

@@ -1,6 +1,6 @@
 import { MouseEvent, useState } from "react";
-import { Avatar, Checkbox, TableCell, TableRow } from "@mui/material";
-import { DeleteOutline, PageviewOutlined, Edit } from "@mui/icons-material";
+import { Avatar, Button, Checkbox, TableCell, TableRow } from "@mui/material";
+import { DeleteOutline, PageviewOutlined, Edit, EditNoteOutlined } from "@mui/icons-material";
 // CUSTOM DEFINED HOOK
 import useNavigate from "@/hooks/useNavigate";
 // CUSTOM COMPONENTS
@@ -75,7 +75,12 @@ const UserTableRow = (props: UserRowProps) => {
       </TableCell>
 
       <TableCell padding="normal">
-        <TableMoreMenu
+        <Button variant="text" onClick={() => handleViewProfileDetailsUser(user)}>
+                  <FlexBox gap={1}>
+                    <EditNoteOutlined/>Edit
+                  </FlexBox>
+                </Button>
+        {/* <TableMoreMenu
           open={openMenuEl}
           handleOpen={handleOpenMenu}
           handleClose={handleCloseOpenMenu}
@@ -87,7 +92,7 @@ const UserTableRow = (props: UserRowProps) => {
               handleCloseOpenMenu();
               handleViewProfileDetailsUser(user);
             }}
-          />
+          /> */}
           {/* <TableMoreMenuItem
             Icon={Edit}
             title="Edit"
@@ -104,7 +109,7 @@ const UserTableRow = (props: UserRowProps) => {
               handleDeleteUser(user.id);
             }}
           /> */}
-        </TableMoreMenu>
+        {/* </TableMoreMenu> */}
       </TableCell>
     </TableRow>
   );

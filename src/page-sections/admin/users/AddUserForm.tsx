@@ -300,24 +300,19 @@ const AddUserForm: FC<AddUserFormProps> = ({ handleCancel, data }) => {
               </TextField>
             </Grid>
             <Grid item sm={6} xs={12}>
-              <TextField
-                name="tier"
-                select
+            <TextField
                 fullWidth
-                variant="outlined"
+                name="tier"
+                // type="email"
                 label="Tier"
-                value={values.tier}
+                type="number"
+                variant="outlined"
                 onBlur={handleBlur}
+                value={values.tier}
                 onChange={handleChange}
                 error={Boolean(errors.tier && touched.tier)}
                 helperText={(touched.tier && errors.tier) as string}
-              >
-                {ALL_TIERS.map(({ id, name, value }) => (
-                  <MenuItem key={id} value={value}>
-                    {name}
-                  </MenuItem>
-                ))}
-              </TextField>
+              />
             </Grid>
           <Grid item sm={6} xs={12}>
               <TextField

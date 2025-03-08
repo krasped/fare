@@ -5,6 +5,7 @@ import Loadable from "./Loadable";
 import { AuthGuard, RoleBasedGuard } from "@/components/auth";
 import DashboardLayout from "@/layouts/dashboard/DashboardLayout";
 import { Roles } from "@/components/auth/RoleBasedGuard";
+import { UrlHelper } from "./constants";
 
 // ALL DASHBOARD PAGES
 
@@ -19,7 +20,7 @@ const Support = Loadable(lazy(() => import("@/pages/admin/support")));
 
 export const AdminRoutes = [
   {
-    path: "admin",
+    path: UrlHelper.admin,
     element: (
       <AuthGuard>
         <DashboardLayout>
@@ -31,12 +32,12 @@ export const AdminRoutes = [
     ),
     children: [
       { index: true, element: <Dashboard /> },
-      { path: "users", element: <Users /> },
-      { path: "leads", element: <Leads /> },
-      { path: "analytics",element: <Analytics /> },
-      { path: "billing",element: <Billing /> },
-      { path: "settings",element: <Settings /> },
-      { path: "support",element: <Support /> },
+      { path: UrlHelper.users, element: <Users /> },
+      { path: UrlHelper.leads,  element: <Leads /> },
+      { path: UrlHelper.analytics, element: <Analytics /> },
+      { path: UrlHelper.billing, element: <Billing /> },
+      { path: UrlHelper.settings, element: <Settings /> },
+      { path: UrlHelper.support, element: <Support /> },
     ],
   },
 ];

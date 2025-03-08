@@ -83,6 +83,7 @@ const UserTableRow = (props: UserRowProps) => {
             <Paragraph fontSize={13}>{user?.submittedBy?.email}</Paragraph>
           </div>
         </FlexBox></TableCell>
+      <TableCell padding="normal">{user.phone}</TableCell>
 
       <TableCell padding="normal">{user.agency}</TableCell>
       <TableCell padding="normal">{user.category}</TableCell>
@@ -90,7 +91,7 @@ const UserTableRow = (props: UserRowProps) => {
       <TableCell padding="normal">{user.status}</TableCell>
 
       <TableCell padding="normal">
-        <StatusBadge type={user.priority === Priority.high ? "error" : (user.priority === Priority.high ? "warning" : "primary")}>
+        <StatusBadge type={user.priority === Priority.critical ? "error" : (user.priority === Priority.high ? "warning" : (user.priority === Priority.medium ? "success" : "primary"))}>
           {user.priority}
         </StatusBadge>
       </TableCell>

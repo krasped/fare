@@ -26,6 +26,7 @@ import { Roles } from "@/components/auth/RoleBasedGuard";
 import { BigModal } from "@/components/modal";
 import { Close } from "@mui/icons-material";
 import ProfilePageView from "../viewUser";
+import { StrNum } from "@/models/common";
 
 export type SubscriptionType= "Free Trial" | "Basic" | "Standard" | "Premium"
 
@@ -36,7 +37,7 @@ export enum Statuses {
 }
 
 export interface User {
-  id: string
+  id: StrNum;
   avatar?: string
   agentName: string
   email: string

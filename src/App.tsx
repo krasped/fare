@@ -19,6 +19,9 @@ import useSettings from "@/hooks/useSettings";
 // I18N FILE
 import "./i18n";
 import { SnackbarProvider } from "./contexts/snackbarContext";
+import axios from "axios";
+
+axios.defaults.baseURL = import.meta.env.REACT_APP_API_PATH;
 
 const App = () => {
   const { settings } = useSettings();

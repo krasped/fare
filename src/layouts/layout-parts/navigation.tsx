@@ -3,6 +3,7 @@ import { SvgIconProps } from "@mui/material";
 // CUSTOM ICON COMPONENT
 import duotone from "@/icons/duotone";
 import { Roles } from "@/components/auth/RoleBasedGuard";
+import { UrlHelper } from "@/routes/constants";
 
 // type ChildItem = { name: string; path: string };
 
@@ -36,37 +37,37 @@ const adminNavigations: Navigations[] = [ // admin
   },
   {
     name: "User Management",
-    path: "/admin/users",
+    path: "/admin/" + UrlHelper.users,
     icon: duotone.UserList,
     access: Roles.admin,
   },
   {
     name: "Marketing",
-    path: "/admin/leads",
+    path: "/admin/"  + UrlHelper.leads ,
     icon: duotone.LayerGroup,
     access: Roles.admin,
   },
   {
     name: "Analytics",
-    path: "/admin/analytics",
+    path: "/admin/"  + UrlHelper.analytics,
     icon: duotone.BadgeDollar,
     access: Roles.admin,
   },
   {
     name: "Billing",
-    path: "/admin/billing",
+    path: "/admin/"  + UrlHelper.billing,
     icon: duotone.MessagesDollar,
     access: Roles.admin,
   },
   {
     name: "Support",
-    path: "/admin/support",
+    path: "/admin/"  + UrlHelper.support,
     icon: duotone.Accounts,
     access: Roles.admin,
   },
   {
     name: "Settings",
-    path: "/admin/settings",
+    path: "/admin/"  + UrlHelper.settings,
     icon: duotone.Settings,
     access: Roles.admin,
   },

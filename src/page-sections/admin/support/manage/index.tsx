@@ -50,6 +50,7 @@ const mockTickets: Ticket[] = [
       email: "john@example.com"
     },
     subject: "Cannot access my dashboard",
+    phone: "02345236336",
     priority: "high",
     status: "Open",
     lastUpdated: "2024-03-20T10:00:00Z",
@@ -64,6 +65,8 @@ const mockTickets: Ticket[] = [
     },
     subject: "Login issues after password reset",
     priority: "medium",
+    phone: "02345236336",
+
     status: "Resolved",
     lastUpdated: "2024-03-19T15:30:00Z",
     assignedTo: "agent1",
@@ -82,6 +85,8 @@ const mockTickets: Ticket[] = [
     },
     subject: "Need help with subscription upgrade",
     priority: "low",
+    phone: "02345236336",
+
     status: "Resolved",
     lastUpdated: "2024-03-18T09:15:00Z",
     assignedTo: "agent2",

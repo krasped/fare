@@ -232,7 +232,7 @@ const ViewManageForm: FC<RefundFormProps> = ({ handleClose, data }) => {
                 ))}
               </TextField>
             </Grid> */}
-            <Grid item sm={6} xs={12}>
+            {/* <Grid item sm={6} xs={12}>
               <TextField
                 fullWidth
                 name="phone"
@@ -244,17 +244,17 @@ const ViewManageForm: FC<RefundFormProps> = ({ handleClose, data }) => {
                 error={Boolean(errors.phone && touched.phone)}
                 helperText={(touched.phone && errors.phone) as string}
               />
-            </Grid>
+            </Grid> */}
             <Grid item sm={12} xs={12}>
               <Stack spacing={2}>
                 <ListItem
                   text="Submitted By:"
                   description={`${data?.submittedBy.name} (${data?.submittedBy.email})`}
                 />
-                {/* <ListItem
-                  text="Subject:"
-                  description={data?.subject}
-                /> */}
+                <ListItem
+                  text="Phone number:"
+                  description={data?.phone}
+                />
               </Stack>
             </Grid>
             <Grid item sm={12} xs={12}>

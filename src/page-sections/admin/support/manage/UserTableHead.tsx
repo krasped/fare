@@ -27,6 +27,7 @@ const headCells = [
   { id: "id", numeric: true, disablePadding: false, label: "Ticket ID" },
   { id: "createdAt", numeric: true, disablePadding: false, label: "Created At" },
   { id: "agentName", numeric: true, disablePadding: false, label: "Agent Name" },
+  { id: "phone", numeric: true, disablePadding: false, label: "Phone" },
   { id: "agency", numeric: true, disablePadding: false, label: "Agency" },
   { id: "category", numeric: true, disablePadding: false, label: "Category" },
   { id: "subject", numeric: true, disablePadding: false, label: "Subject" },

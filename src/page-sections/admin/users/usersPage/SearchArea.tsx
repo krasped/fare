@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { Box, IconButton, MenuItem, TextField } from "@mui/material";
 import Search from "@mui/icons-material/Search";
 // CUSTOM DEFINED HOOK
@@ -10,6 +10,8 @@ import { FlexBetween } from "@/components/flexbox";
 import Apps from "@/icons/Apps";
 import FormatBullets from "@/icons/FormatBullets";
 import { Roles } from "@/components/auth/RoleBasedGuard";
+import { useAppSelector } from "@/redux/store";
+import { Agencies } from "@/models/admin/userManagement";
 
 // ==========================================================================================
 type SearchAreaProps = {
@@ -21,6 +23,9 @@ type SearchAreaProps = {
 // ==========================================================================================
 
 const SearchArea = (props: SearchAreaProps) => {
+  const [allAgencies, setAllAgencies] = useState<Agencies[]>([])
+
+  const {agencies} = useAppSelector(state => state.users.data)
   const ALL_ROLES = [
     { id: 1, name: "All Roles", value: "" },
     { id: 2, name: "Admin", value: Roles.admin },
@@ -30,11 +35,10 @@ const SearchArea = (props: SearchAreaProps) => {
     { id: 5, name: "Agent Owner", value: Roles.agentOwner },
     { id: 6, name: "Marketing", value: Roles.marketing },
   ];
-  const ALL_AGENCIES = [
-    { id: 1, name: "All Agencies", value: "" },
-    { id: 2, name: "Top Reality", value: "top reality" },
-    { id: 3, name: "Best Homes", value: "best homes" },
+  let START_AGENCIES = [
+    { id: "1", name: "All Agencies"},
   ];
+  
   const { handleChangeFilter, filter } = props;
 
   const navigate = useNavigate();
@@ -42,6 +46,11 @@ const SearchArea = (props: SearchAreaProps) => {
 
   const activeColor = (path: string) =>
     pathname === path ? "primary.main" : "grey.400";
+
+
+  useEffect(() => {
+    setAllAgencies([...START_AGENCIES, ...agencies])
+  },[agencies])
 
   return (
     <FlexBetween gap={1} my={3}>
@@ -75,8 +84,8 @@ const SearchArea = (props: SearchAreaProps) => {
         value={filter.agency}
         onChange={(e) => handleChangeFilter("agency", e.target.value)}
       >
-        {ALL_AGENCIES.map(({ id, name, value }) => (
-          <MenuItem key={id} value={value}>
+        {allAgencies && allAgencies.map(({ id, name }) => (
+          <MenuItem key={id} value={id}>
             {name}
           </MenuItem>
         ))}

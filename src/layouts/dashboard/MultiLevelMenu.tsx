@@ -99,8 +99,8 @@ const MultiLevelMenu: FC<Props> = ({ sidebarCompact }) => {
         >
           {item?.icon ? (
             <item.icon sx={ICON_STYLE(activeRoute(item.path!))} />
-          ) : (
-            <BulletIcon active={activeRoute(item.path!)} />
+          ) : ( null
+            // <BulletIcon active={activeRoute(item.path!)} /> null
           )}
 
           <ItemText compact={COMPACT} active={activeRoute(item.path!)}>

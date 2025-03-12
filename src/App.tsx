@@ -21,7 +21,7 @@ import "./i18n";
 import { SnackbarProvider } from "./contexts/snackbarContext";
 import axios from "axios";
 
-axios.defaults.baseURL = import.meta.env.REACT_APP_API_PATH;
+axios.defaults.baseURL = "http://192.168.1.122:8000";
 
 const App = () => {
   const { settings } = useSettings();

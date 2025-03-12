@@ -1,4 +1,4 @@
-import { SetStateAction, SyntheticEvent, useState } from "react";
+import { SetStateAction, SyntheticEvent, useEffect, useState } from "react";
 import {
   Box,
   Card,
@@ -27,6 +27,10 @@ import { BigModal } from "@/components/modal";
 import { Close } from "@mui/icons-material";
 import ProfilePageView from "../viewUser";
 import { StrNum } from "@/models/common";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { AppDispatch, useAppDispatch, useAppSelector } from "@/redux/store";
+import { fetchAgencies, fetchUsers } from "@/redux/admin/usersSlice";
 
 export type SubscriptionType= "Free Trial" | "Basic" | "Standard" | "Premium"
 
@@ -37,17 +41,19 @@ export enum Statuses {
 }
 
 export interface User {
-  id: StrNum;
-  avatar?: string
+  user_id: StrNum;
+  avatar?: string;
+  username: string;
   agentName: string
-  email: string
+  email: string;
+  agency_name: string;
   phone: string
   agency: string
   parentAgency?: string
   role: string //Roles
-  status: "Active" | "Inactive" | "Pending"
+  user_status: "Active" | "Inactive" | "Pending"
   documentsComplete?: boolean
-  subscriptionType: SubscriptionType
+  plan: SubscriptionType
   subscriptionExpiry?: string
   documentsStatus?: {
     complete: boolean
@@ -56,51 +62,54 @@ export interface User {
   approvalStatus?: "Pending" | "Approved" | "Rejected"
 }
 
-const mockUsers: User[] = [
-  {
-    id: "1",
-    agentName: "John Doe",
-    email: "john@example.com",
-    phone: "+1 234 567 8900",
-    agency: "Top Realty",
-    parentAgency: "Premier Group",
-    role: "Agent",
-    status: "Active",
-    documentsComplete: true,
-    subscriptionType: "Standard",
-    subscriptionExpiry: "2024-12-31",
-    documentsStatus: {
-      complete: true
-    },
-    approvalStatus: "Approved"
-  },
-  {
-    id: "2",
-    agentName: "Jane Smith",
-    email: "jane@example.com",
-    phone: "+1 234 567 8901",
-    agency: "Best Homes",
-    parentAgency: "Premier Group",
-    role: "Manager",
-    status: "Active",
-    documentsComplete: false,
-    subscriptionType: "Basic",
-    subscriptionExpiry: "2024-06-30",
-    documentsStatus: {
-      complete: false,
-      missingDocs: ["License", "Insurance"]
-    },
-    approvalStatus: "Pending"
-  },
-]
+// const mockUsers: User[] = [
+//   {
+//     id: "1",
+//     agentName: "John Doe",
+//     email: "john@example.com",
+//     phone: "+1 234 567 8900",
+//     agency: "Top Realty",
+//     parentAgency: "Premier Group",
+//     role: "Agent",
+//     status: "Active",
+//     documentsComplete: true,
+//     subscriptionType: "Standard",
+//     subscriptionExpiry: "2024-12-31",
+//     documentsStatus: {
+//       complete: true
+//     },
+//     approvalStatus: "Approved"
+//   },
+//   {
+//     id: "2",
+//     agentName: "Jane Smith",
+//     email: "jane@example.com",
+//     phone: "+1 234 567 8901",
+//     agency: "Best Homes",
+//     parentAgency: "Premier Group",
+//     role: "Manager",
+//     status: "Active",
+//     documentsComplete: false,
+//     subscriptionType: "Basic",
+//     subscriptionExpiry: "2024-06-30",
+//     documentsStatus: {
+//       complete: false,
+//       missingDocs: ["License", "Insurance"]
+//     },
+//     approvalStatus: "Pending"
+//   },
+// ]
 
 const Users = () => {
-  const [users, setUsers] = useState([...USER_LIST]);
+  const dispatch = useAppDispatch();
+  const { data, status, error } = useAppSelector((state) => state.users);
+
+  // const [users, setUsers] = useState([...USER_LIST]);
   const [userFilter, setUserFilter] = useState({ subscriptionType: "", search: "", role: "", agency: "" });
   const [isEdit, setIsEdit] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [openViewUser, setOpenViewUser] = useState(false);
-  const [data, setData] = useState<User>();
+  const [data1, setData] = useState<User>();
 
   const {
     page,
@@ -135,14 +144,14 @@ const Users = () => {
     setOpenViewUser(true);
   }
 
-  const filteredUsers = stableSort(users, getComparator(order, orderBy)).filter(
+  const filteredUsers = stableSort(data.users, getComparator(order, orderBy)).filter(
     (item) => {
       return (
-        (userFilter.subscriptionType ? item.subscriptionType === userFilter.subscriptionType : true) &&
-        (userFilter.role ? item.role.toLocaleLowerCase() == userFilter.role : true ) && 
-        (userFilter.agency ? item.agency.toLocaleLowerCase() == userFilter.agency : true ) && 
+        (userFilter.subscriptionType ? item.plan === userFilter.subscriptionType : true) &&
+        (userFilter.role ? item?.role?.toLocaleLowerCase() == userFilter?.role : true ) && 
+        (userFilter.agency ? item?.agency_name?.toLocaleLowerCase() == userFilter?.agency : true ) && 
         (userFilter.search ?
-          item.name.toLowerCase().includes(userFilter.search.toLowerCase()) ||
+          item.username.toLowerCase().includes(userFilter.search.toLowerCase()) ||
           item.email.toLowerCase().includes(userFilter.search.toLowerCase()) ||
           item.agency.toLowerCase().includes(userFilter.search.toLowerCase())
           : true )
@@ -156,14 +165,21 @@ const Users = () => {
     },
   );
 
-  const handleDeleteUser = (id: string) => {
-    setUsers((state) => state.filter((item) => item.id !== id));
+  const handleDeleteUser = (id: StrNum) => {
+    // setUsers((state) => state.filter((item) => item.id !== id));
   };
 
   const handleAllUserDelete = () => {
-    setUsers((state) => state.filter((item) => !selected.includes(item.id)));
-    handleSelectAllRows([])();
+    // setUsers((state) => state.filter((item) => !selected.includes(item.id)));
+    // handleSelectAllRows([])();
   };
+
+  useEffect(() => {
+    if (status === 'idle') {
+      dispatch<any>(fetchUsers());
+      dispatch<any>(fetchAgencies());
+    }
+  }, [dispatch, status]);
 
   return (
     <Box pt={2} pb={4}>
@@ -196,7 +212,7 @@ const Users = () => {
                   <Close />
                 </IconButton>
 
-            <ProfilePageView data={data} />
+            <ProfilePageView data={data1} />
           </BigModal>
         </Box>
 
@@ -219,7 +235,7 @@ const Users = () => {
                 rowCount={filteredUsers.length}
                 onRequestSort={handleRequestSort}
                 onSelectAllRows={handleSelectAllRows(
-                  filteredUsers.map((row) => row.id),
+                  filteredUsers.map((row) => row.user_id.toString()),
                 )}
               />
 
@@ -228,9 +244,9 @@ const Users = () => {
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((user) => (
                     <UserTableRow
-                      key={user.id}
+                      key={user.user_id}
                       user={user}
-                      isSelected={isSelected(user.id)}
+                      isSelected={isSelected(user.user_id.toString())}
                       handleSelectRow={handleSelectRow}
                       handleDeleteUser={handleDeleteUser}
                       handleEditUser={handleEditUser}

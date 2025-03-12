@@ -5,42 +5,48 @@ import { User} from '@/page-sections/admin/users/usersPage';
 import { AdminApiUrls } from '../constants';
 import { StrNum } from '@/models/common';
 import { GenericState, MyKnownError, ReduxApiStatus } from '@/models/redux';
-
+import { createUserApi, deleteUserApi, fetchUsersApi, updateUserApi } from './api/users';
+import { Agencies, CreateUser } from '@/models/admin/userManagement';
+import { fetchAgenciesApi } from './api/agencies';
 const createAppAsyncThunk = createAsyncThunk.withTypes<{
   state: RootState
   dispatch: AppDispatch
+
   rejectValue: MyKnownError
   extra: { s: string; n: number }
 }>()
 
-// Fetch users from the API
+export const fetchAgencies = createAppAsyncThunk('users/fetchAgencies', async () => {
+  return await fetchAgenciesApi();
+});
+
 export const fetchUsers = createAppAsyncThunk('users/fetchUsers', async () => {
-  const response = await axios.get<User[]>(AdminApiUrls.getAllUsers);
-  return response.data;
+  return await fetchUsersApi();
 });
 
 // Create a new user
-export const createUser = createAppAsyncThunk('users/createUser', async (newUser: User, {dispatch}) => {
-  const response = await axios.post(AdminApiUrls.createUser, newUser);
-  return {data: response.data, dispatch};
+export const createUser = createAppAsyncThunk('users/createUser', async (newUser: CreateUser, {dispatch}) => {
+  const data = await createUserApi(newUser);
+  return { data, dispatch };
 });
 
 // Update a user
 export const updateUser = createAppAsyncThunk('users/updateUser', async (updatedUser: User, {dispatch}) => {
-  const response = await axios.put(AdminApiUrls.updateUser, updatedUser);
-  return {data: response.data, dispatch};
+  const data = await updateUserApi(updatedUser);
+  return { data, dispatch };
 });
 
 // Delete a user
 export const deleteUser = createAppAsyncThunk('users/deleteUser', async (userId: StrNum) => {
-  await axios.delete(`${AdminApiUrls.updateUser}`);
-  return userId;
+  const data = await deleteUserApi(userId);
+  return data
 });
 
-const initialState: GenericState<{users: User[], usersDocuments:User[]}> = {
+const initialState: GenericState<{users: User[], usersDocuments:User[], agencies: Agencies[]}> = {
   data:{
     users:[],
     usersDocuments:[],
+    agencies:[],
   }, // Инициализация как пустой массив
   status: 'idle',  // idle, loading, succeeded, failed
   error: null,
@@ -52,6 +58,9 @@ const usersSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(fetchAgencies.fulfilled, (state, action: PayloadAction<{agencies: Agencies[]}>) => {
+        state.data.agencies = action.payload.agencies;
+      })
       .addCase(fetchUsers.pending, (state) => {
         state.status = 'loading';
       })
@@ -80,7 +89,7 @@ const usersSlice = createSlice({
         // }
       })
       .addCase(deleteUser.fulfilled, (state, action: PayloadAction<StrNum>) => {
-          state.data.users = state.data.users.filter((user) => user.id != action.payload);
+          state.data.users = state.data.users.filter((user) => user.user_id != action.payload);
         // state.users = state.users.filter((user) => user.id !== action.payload);
       });
   },

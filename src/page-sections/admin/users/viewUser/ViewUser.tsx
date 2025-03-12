@@ -115,8 +115,8 @@ const Layout: FC<LayoutProps> = ({ children, handleTabList, data, onlyDocuments 
               {data?.email}
             </Typography>
             {!onlyDocuments && <FlexBox mt={1} justifyContent={"center"}>
-              <StatusBadge type={data?.status === Statuses.active ? "success" : (data?.status === Statuses.pending ? "warning" : "error")}>
-                {data?.status}
+              <StatusBadge type={data?.user_status === Statuses.active ? "success" : (data?.user_status === Statuses.pending ? "warning" : "error")}>
+                {data?.user_status}
               </StatusBadge>
             </FlexBox>}
           </Box>

@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { usersReducer, billingReducer , dashboardReducer, leadsReducer, settingReducer, supportReducer, analyticsReducer  } from "./admin";
-import { useDispatch } from 'react-redux';
+import { TypedUseSelectorHook, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 // import logger from 'redux-logger';
 // import additionalMiddleware from 'additional-middleware'
 
@@ -33,5 +34,6 @@ const store = configureStore({
 
 export type AppDispatch = typeof store.dispatch
 export const useAppDispatch = useDispatch.withTypes<AppDispatch>() 
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 export default store;

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import {
   Grid,
   Stack,
@@ -23,6 +23,12 @@ import { AvatarBadge } from "@/components/avatar-badge";
 import { Roles } from "@/components/auth/RoleBasedGuard";
 import { FlexBetween, FlexBox } from "@/components/flexbox";
 import { nanoid } from "nanoid";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
+import { User } from "./usersPage";
+import { useSnackbar } from "@/contexts/snackbarContext";
+import { Agencies, CreateUser } from "@/models/admin/userManagement";
+import { createUser, fetchUsers } from "@/redux/admin/usersSlice";
+
 
 
 const SwitchWrapper = styled(FlexBox)({
@@ -35,7 +41,11 @@ type AddUserFormProps = { handleCancel: () => void; data?: any };
 // ==========================================================================
 
 const AddUserForm: FC<AddUserFormProps> = ({ handleCancel, data }) => {
+  const dispatch = useAppDispatch();
+  const showSnackbar = useSnackbar();
   const downSm = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
+  const {agencies} = useAppSelector(state => state.users.data)
+  const [allAgencies, setAllAgencies] = useState<Agencies[]>([])
 
   const ALL_ROLES = [
       { id: 1, name: "Admin", value: Roles.admin },
@@ -45,8 +55,8 @@ const AddUserForm: FC<AddUserFormProps> = ({ handleCancel, data }) => {
       { id: 6, name: "Agent Owner", value: Roles.agentOwner },
     ];
   const ALL_PARENTS = [
-      { id: 1, name: "Premier Group", value: "Premier Group" },
-      { id: 2, name: "Elit Realty", value: "Elit Realty" },
+      { id: 1, name: "Premier Group", value: "df2e7ddc-48de-4f48-881c-59e5e6afcf4b" },
+      { id: 2, name: "Elit Realty", value: "08ab7f62-0750-4b1e-b929-686bd13a816c" },
     ];
   const ALL_PLANS = [
       { id: 1, name: "Free Trial", value: "Free Trial" },
@@ -81,7 +91,7 @@ const AddUserForm: FC<AddUserFormProps> = ({ handleCancel, data }) => {
     name: Yup.string()
       .min(3, "Must be greater then 3 characters")
       .required("Full Name is Required!"),
-    agency: Yup.string().required("Agency is Required!"),
+    agency: Yup.string(),
     email: Yup.string()
       .email("Invalid email address")
       .required("Email is Required!"),
@@ -108,7 +118,34 @@ const AddUserForm: FC<AddUserFormProps> = ({ handleCancel, data }) => {
   } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: (values) => console.log(values),
+    onSubmit: (values) => {
+      console.log(values)
+      const payload: CreateUser  = {
+        // username: '',
+        full_name: values?.name || '',
+        password: values.password,
+        email: values.email,
+        phone: values.phone,
+        role: values.role,
+        user_status: "Active",// hardcode , move to back
+        parent_agent: null,
+        plan: values.plan,
+        tier: values.tier.toString(),
+        account_manager: values.accountManager,
+        agency_name: values.isNewAgency ? values.agency : null,
+        agency_id: values.isNewAgency ? null: values?.parentAgency,
+        new_agency: values?.isNewAgency
+      }
+      dispatch<any>(createUser(payload)).then((res: { data: any; }) => {
+        if(res?.data){
+          showSnackbar("User Created", "New user has been created successfully")
+          dispatch(fetchUsers)
+          handleCancel()
+        } else {
+          showSnackbar("Error", "Something went wrong")
+        }
+      })
+    },
   });
 
   const changeIsNew = (value: boolean) => {
@@ -118,6 +155,10 @@ const AddUserForm: FC<AddUserFormProps> = ({ handleCancel, data }) => {
     }
     setFieldValue("isNewAgency", value)
   }
+
+  useEffect(() => {
+      setAllAgencies( agencies)
+    },[agencies])
 
   return (
     <div>
@@ -179,6 +220,7 @@ const AddUserForm: FC<AddUserFormProps> = ({ handleCancel, data }) => {
             <Grid item sm={6} xs={12}>
               <TextField
                 fullWidth
+                disabled={!values.isNewAgency}
                 name="agency"
                 label="Agency Name"
                 variant="outlined"
@@ -250,8 +292,8 @@ const AddUserForm: FC<AddUserFormProps> = ({ handleCancel, data }) => {
                 error={Boolean(errors.parentAgency && touched.parentAgency)}
                 helperText={(touched.parentAgency && errors.parentAgency) as string}
               >
-                {ALL_PARENTS.map(({ id, name, value }) => (
-                  <MenuItem key={id} value={value}>
+                {allAgencies.map(({ id, name }) => (
+                  <MenuItem key={id} value={id}>
                     {name}
                   </MenuItem>
                 ))}

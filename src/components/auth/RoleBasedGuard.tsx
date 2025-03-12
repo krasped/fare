@@ -6,12 +6,12 @@ import useAuth from "@/hooks/useAuth";
 import ErrorView from "@/page-sections/permission/ErrorView";
 
 export enum Roles {
-  admin = "admin",
-  subAgent = "subAgent",
-  manager = "manager",
-  marketing = "marketing",
-  agentOwner = "agentOwner",
-  agent = "agentOwner",
+  admin = "Admin",
+  subAgent = "SubAgent",
+  manager = "Manager",
+  marketing = "Marketing",
+  agentOwner = "AgentOwner",
+  agent = "AgentOwner",
 }
 
 // ==============================================================

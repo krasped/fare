@@ -32,7 +32,7 @@ export const SidebarWrapper = styled("div", {
 
 // COMMON ICON STYLE
 export const ICON_STYLE = (active: number) => ({
-  fontSize: 18,
+  fontSize: 28,
   color: active ? "primary.main" : "text.secondary",
 });
 
@@ -62,14 +62,42 @@ export const BulletIcon = styled("div", {
 export const AccordionButton = styled(ButtonBase)(({ theme }) => ({
   height: 48,
   width: "100%",
-  padding: "0 12px",
-  marginBottom: 5,
-  borderRadius: 50,
+  padding: "0 10px",
+  borderTop: "1px solid rgba(230, 230, 230, 1)",
+  borderRight: "1px solid rgba(230, 230, 230, 1)",
+  borderLeft: "1px solid rgba(230, 230, 230, 1)",
+  // marginBottom: 15,
+  borderRadius: "10px 10px 0 0",
   justifyContent: "space-between",
+  backgroundColor: isDark(theme)
+      ? theme.palette.grey[800]
+      : "white",
+  ".MuiSvgIcon-root": { color: theme.palette.primary.main },
+  // "&:hover": {
+  //   boxShadow: '0px 4px 11px 0px rgba(0, 0, 0, 0.25)',
+  //   borderRadius: "10px 10px 0 0",
+  //   backgroundColor: theme.palette.primary[25],
+  // },
+}));
+
+export const CollapsedAccordionButton = styled(ButtonBase)(({ theme }) => ({
+  height: 48,
+  width: "100%",
+  padding: "0 10px",
+  border: "1px solid rgba(230, 230, 230, 1)",
+  marginBottom: 15,
+  borderRadius: "10px",
+  justifyContent: "space-between",
+  backgroundColor: isDark(theme)
+      ? theme.palette.grey[800]
+      : "white",
+  ".MuiSvgIcon-root": { color: theme.palette.primary.main },
   "&:hover": {
-    borderRadius: 50,
-    backgroundColor: theme.palette.action.hover,
-    "& span, & .MuiSvgIcon-root": { color: theme.palette.primary.main },
+    boxShadow: '0px 4px 11px 0px rgba(0, 0, 0, 0.25)',
+    borderRadius: "10px",
+    backgroundColor: isDark(theme)
+    ? theme.palette.primary[400]:
+    theme.palette.primary[25],
   },
 }));
 
@@ -92,12 +120,12 @@ export const ChevronRightStyled = styled(ChevronRight, {
 export const ItemText = styled(Span, {
   shouldForwardProp: (prop) => prop !== "compact" && prop !== "active",
 })<ActiveCompact>(({ theme, compact, active }) => ({
-  fontSize: 14,
-  fontWeight: 500,
+  fontSize: 16,
+  fontWeight: 400,
   whiteSpace: "nowrap",
   paddingLeft: "0.8rem",
   transition: "all 0.15s ease",
-  color: active ? theme.palette.primary.main : theme.palette.text.secondary,
+  color: active ? theme.palette.primary.main : theme.palette.text.primary,
   ...(compact && { opacity: 0, width: 0, paddingLeft: 0 }),
 }));
 
@@ -105,24 +133,34 @@ export const ItemText = styled(Span, {
 export const NavItemButton = styled(ButtonBase, {
   shouldForwardProp: (prop) => prop !== "active",
 })<Active>(({ theme, active }) => ({
-  height: 44,
+  height: 48,
   width: "100%",
-  marginBottom: 4,
-  padding: "0 18px",
+  border: "1px solid rgba(230, 230, 230, 1)",
+  borderRadius: "10px",
+  marginBottom: 15,
+  padding: "0 10px",
+  backgroundColor: isDark(theme)
+      ? theme.palette.grey[800]
+      : "white",
   justifyContent: "flex-start",
   "&.Mui-disabled": { opacity: 0.6 },
+  "& > .MuiSvgIcon-root": { color: theme.palette.primary.main },
   ...(active && {
-    borderRadius: 50,
-    color: theme.palette.primary.main,
+    borderRadius: "10px",
+    boxShadow: '0px 4px 11px 0px rgba(0, 0, 0, 0.25)',
+    // color: theme.palette.primary.main,
     backgroundColor: isDark(theme)
       ? theme.palette.grey[800]
-      : theme.palette.primary[25],
+      : theme.palette.primary[50],
   }),
 
   "&:hover": {
-    borderRadius: 50,
-    backgroundColor: theme.palette.action.hover,
-    "& > span, & > .MuiSvgIcon-root": { color: theme.palette.primary.main },
+    boxShadow: '0px 4px 11px 0px rgba(0, 0, 0, 0.25)',
+    borderRadius: "10px",
+    backgroundColor: isDark(theme)
+      ? theme.palette.primary[400]:
+      theme.palette.primary[25],
+    // "& > span, & > .MuiSvgIcon-root": { color: theme.palette.primary.main },
   },
 }));
 

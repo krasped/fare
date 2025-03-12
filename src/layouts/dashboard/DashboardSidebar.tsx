@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Box, IconButton } from "@mui/material";
+import { Box, IconButton, useTheme } from "@mui/material";
 // LAYOUT BASED HOOK
 import useLayout from "./context/useLayout";
 // CUSTOM COMPONENTS
@@ -14,6 +14,8 @@ import ArrowLeftToLine from "@/icons/duotone/ArrowLeftToLine";
 import { SidebarWrapper } from "../layout-parts/styles/sidebar";
 import { Roles } from "@/components/auth/RoleBasedGuard";
 import useAuth from "@/hooks/useAuth";
+import { Palette } from "lucide-react";
+import { isDark } from "@/utils/constants";
 
 const TOP_HEADER_AREA = 70;
 
@@ -21,13 +23,17 @@ const DashboardSidebar = () => {
   const { sidebarCompact, handleSidebarCompactToggle } = useLayout();
   const [onHover, setOnHover] = useState(false);
   const { user } = useAuth();
-
-
+  const theme = useTheme()
   // ACTIVATE COMPACT WHEN TOGGLE BUTTON CLICKED AND NOT ON HOVER STATE
   const COMPACT = sidebarCompact && !onHover ? 1 : 0;
 
   return (
     <SidebarWrapper
+      sx={{
+         backgroundColor: isDark(theme)
+              ? theme.palette.grey[800]
+              : theme.palette.primary[25],
+      }}
       compact={sidebarCompact ? 1 : 0}
       onMouseEnter={() => setOnHover(true)}
       onMouseLeave={() => sidebarCompact && setOnHover(false)}
@@ -43,7 +49,7 @@ const DashboardSidebar = () => {
           />
           
         </Link>
-        <Box 
+        {!COMPACT ? <Box 
           sx={{
             display: 'flex', 
             alignItems: 'center', 
@@ -54,7 +60,7 @@ const DashboardSidebar = () => {
               (user?.role == Roles.admin ? "Admin Panel": "Marketer CRM")
             }
            
-          </Box>
+          </Box> : null}
         {/* SIDEBAR COLLAPSE BUTTON */}
         {!COMPACT ? (
           <IconButton onClick={handleSidebarCompactToggle}>

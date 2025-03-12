@@ -1,7 +1,7 @@
 export const AdminApiUrls = {
   //usersManagements
-  getAllUsers: "api/tripin_users/create",
-  createUser: "api/tripin_users/create",
+  getAllUsers: "/api/users/list",
+  createUser: "/api/users/create",
   deleteUser: "api/tripin_users/create",
   getUserById: "api/tripin_users/create",
   updateUser: "api/tripin_users/create",
@@ -17,4 +17,8 @@ export const AdminApiUrls = {
   //analytics
 
   //dashboard
+
+  //other
+  getAllAgencies: "/api/agencies/list",
+
 }

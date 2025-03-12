@@ -32,7 +32,7 @@ const headCells = [
   { id: "subscriptionType", numeric: true, disablePadding: false, label: "Plan" },
   { id: "status", numeric: true, disablePadding: false, label: "User Status" },
   { id: "documentStatus", numeric: true, disablePadding: false, label: "Document Status" },
-  { id: "actions", numeric: true, disablePadding: false, label: "Actions" },
+  { id: "actions", numeric: true, disablePadding: false, label: "Actions", noSort: true },
 ];
 
 const UserTableHead = (props: UserTableHeadProps) => {
@@ -57,7 +57,7 @@ const UserTableHead = (props: UserTableHeadProps) => {
       }}
     >
       <TableRow>
-        <TableCell padding="checkbox">
+        {/* <TableCell padding="checkbox">
           <Checkbox
             size="small"
             color="primary"
@@ -65,7 +65,7 @@ const UserTableHead = (props: UserTableHeadProps) => {
             checked={rowCount > 0 && numSelected === rowCount}
             indeterminate={numSelected > 0 && numSelected < rowCount}
           />
-        </TableCell>
+        </TableCell> */}
 
         {headCells.map((headCell) => (
           <TableCell
@@ -74,7 +74,8 @@ const UserTableHead = (props: UserTableHeadProps) => {
             sortDirection={orderBy === headCell.id ? order : false}
             sx={{ color: "text.primary", fontWeight: 600 }}
           >
-            <TableSortLabel
+            {headCell?.noSort ? headCell.label  :  
+              <TableSortLabel
               active={orderBy === headCell.id}
               onClick={createSortHandler(headCell.id)}
               direction={orderBy === headCell.id ? order : "asc"}
@@ -86,6 +87,7 @@ const UserTableHead = (props: UserTableHeadProps) => {
                 </Span>
               ) : null}
             </TableSortLabel>
+             }
           </TableCell>
         ))}
       </TableRow>

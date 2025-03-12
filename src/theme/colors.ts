@@ -31,8 +31,10 @@ const grey = {
 };
 
 export const primary = {
-  25: "#F7F5FE",
-  50: "#F4F1FE",
+  25: "rgba(248, 252, 255, 1)",
+  // 25: "#F7F5FE",
+  50: "rgba(206, 228, 255, 1)",
+  // 50: "#F4F1FE",
   100: "#E4DCFD",
   200: "#C8BAFC",
   300: "#A996F8",

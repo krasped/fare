@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { SvgIconProps } from "@mui/material";
 // CUSTOM ICON COMPONENT
 import duotone from "@/icons/duotone";
+import agent from "@/icons/agentIcons"
 import { Roles } from "@/components/auth/RoleBasedGuard";
 import { UrlHelper } from "@/routes/constants";
 
@@ -32,6 +33,7 @@ const adminNavigations: Navigations[] = [ // admin
   {
     name: "Dashboard",
     path: "/admin",
+    // icon: duotone.Dashboard,
     icon: duotone.Dashboard,
     access: Roles.admin,
   },
@@ -82,7 +84,8 @@ const agentNavigations1: Navigations[] = [ // agent
   },
   {
     name: "Search",
-    access: Roles.agent,
+    icon: agent.Orders,
+    // access: Roles.agent,
     children: [
       { name: "Hotels", path: "/agent/hotels" },
       { name: "Flights", path: "/agent/flights/best-price" },
@@ -340,6 +343,6 @@ const navigationsExample: Navigations[] = [
 
 export const navigations: Navigations[] = [
   ...adminNavigations,
-  // ...agentNavigations1,
+  ...agentNavigations1,
   // ...navigationsExample
 ]
